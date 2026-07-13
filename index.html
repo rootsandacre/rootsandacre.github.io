@@ -1,57 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roots &amp; Acre</title>
-  <meta name="description" content="Roots &amp; Acre — small-batch coffee, roasted with care." />
+  <title>Roots &amp; Acre — Micro-roastery &amp; Slow Bar · Jakarta</title>
+  <meta name="description" content="Roots &amp; Acre — Indonesian micro-roastery and reservation-only slow bar in Jakarta. Fresh-roasted single origins from the islands' finest specialty farms." />
 
   <!-- Open Graph / social preview -->
   <meta property="og:title" content="Roots &amp; Acre" />
-  <meta property="og:description" content="Small-batch coffee, roasted with care." />
+  <meta property="og:description" content="From the highlands to the slow bar. Indonesian micro-roastery &amp; reservation-only slow bar in Jakarta." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rootsandacre.com/" />
   <meta property="og:image" content="https://rootsandacre.com/assets/images/og-image.jpg" />
 
-  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/symbol.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Mulish:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital@0;1&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="/">Roots &amp; Acre</a>
-    <nav class="site-nav">
-      <a href="#about">About</a>
-      <a href="#coffee">Coffee</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <!--
+    Placeholder contact values — swap for the real ones before launch:
+    WhatsApp number 6281200001234 · tokopedia.com/rootsandacre ·
+    shopee.co.id/rootsandacre · wholesale@rootsandacre.co
+  -->
+
+  <!-- ====== NAV ====== -->
+  <header class="site-nav">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="#top">
+        <img src="/assets/symbol.svg" alt="Roots and Acre" />
+        <span class="site-nav__wordmark">Roots &amp; Acre</span>
+      </a>
+      <nav class="site-nav__links" aria-label="Primary">
+        <a href="#top">The Story</a>
+        <a href="#buy">Buy the Harvest</a>
+        <a href="#bar-lab">The Bar &amp; Lab</a>
+        <a href="#wholesale">Wholesale</a>
+      </nav>
+      <a class="btn btn--gold btn--sm" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20reservasi%20kursi%20di%20Bar%20%26%20Lab.%0A%0ATanggal%3A%20%0AJam%3A%20%0AJumlah%20orang%3A%20%0A%0ATerima%20kasih!" target="_blank" rel="noopener">Reserve a Seat</a>
+    </div>
   </header>
 
   <main>
+    <!-- ====== HERO ====== -->
     <section class="hero">
-      <h1>Roots &amp; Acre</h1>
-      <p>Small-batch coffee, roasted with care.</p>
+      <!-- Photo slot: swap the placeholder for a real roastery / farm photo -->
+      <div class="hero__photo photo-slot"></div>
+      <div class="hero__scrim-v"></div>
+      <div class="hero__scrim-d"></div>
+      <span class="hero__shape-circle" aria-hidden="true"></span>
+      <span class="hero__shape-quarter" aria-hidden="true"></span>
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__eyebrow-row">
+            <span class="hero__rule"></span>
+            <span class="hero__eyebrow">Micro-roastery &amp; slow bar &middot; Jakarta</span>
+            <span class="hand-note hero__vol">harvest vol. 04</span>
+          </div>
+          <h1>From the highlands<br /><strong>to the slow bar.</strong></h1>
+          <p class="hero__lede">We walk the islands' finest specialty farms and roast each lot by hand in micro-batches &mdash; poured at our twelve-seat slow bar, or shipped fresh to your door.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--gold btn--lg" href="#buy">Buy the Harvest</a>
+            <a class="btn btn--ghost btn--lg" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20reservasi%20kursi%20di%20Bar%20%26%20Lab.%0A%0ATanggal%3A%20%0AJam%3A%20%0AJumlah%20orang%3A%20%0A%0ATerima%20kasih!" target="_blank" rel="noopener">Reserve a Slow Bar Seat</a>
+          </div>
+          <a class="hero__wholesale-link" href="#wholesale">Caf&eacute;s &amp; green buyers &mdash; wholesale &amp; export inquiries <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
     </section>
 
-    <section id="about" class="section">
-      <h2>About</h2>
-      <p>Placeholder copy. Move real content in here as we build.</p>
+    <!-- ====== THREE PATHWAYS ====== -->
+    <section class="pathways">
+      <div class="pathways__inner">
+        <div class="pathways__grid">
+          <a class="pathway" href="#buy">
+            <div class="pathway__eyebrow">The harvest</div>
+            <div class="pathway__title">Buy the beans</div>
+            <p>Fresh-roasted single origins from across the islands &mdash; on Tokopedia, Shopee, or straight through WhatsApp.</p>
+            <span class="pathway__cta">See where to buy &rarr;</span>
+          </a>
+          <a class="pathway" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20reservasi%20kursi%20di%20Bar%20%26%20Lab.%0A%0ATanggal%3A%20%0AJam%3A%20%0AJumlah%20orang%3A%20%0A%0ATerima%20kasih!" target="_blank" rel="noopener">
+            <div class="pathway__eyebrow">The Bar &amp; Lab</div>
+            <div class="pathway__title">Sit with us</div>
+            <p>Twelve seats, one pour at a time &mdash; reserve on WhatsApp for our slow bar in Jakarta.</p>
+            <span class="pathway__cta">Reserve a seat &rarr;</span>
+          </a>
+          <a class="pathway" href="#wholesale">
+            <div class="pathway__eyebrow">Wholesale &amp; export</div>
+            <div class="pathway__title">Pour us in your caf&eacute;</div>
+            <p>Wholesale lots and export sample kits for caf&eacute;s and green buyers.</p>
+            <span class="pathway__cta">Get in touch &rarr;</span>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <section id="coffee" class="section">
-      <h2>Coffee</h2>
-      <p>Placeholder copy.</p>
+    <!-- ====== BUY THE HARVEST ====== -->
+    <section id="buy" class="buy">
+      <div class="buy__inner">
+        <div class="buy__header">
+          <span class="eyebrow">Where to find us</span>
+          <h2>Take the harvest <strong>home.</strong></h2>
+          <p>This week's lots are stocked on Tokopedia and Shopee &mdash; or message us on WhatsApp and we'll help you pick a roast.</p>
+        </div>
+        <div class="buy__grid">
+          <div class="buy-card">
+            <div class="buy-card__badge buy-card__badge--tokopedia">T</div>
+            <div class="buy-card__title">Tokopedia</div>
+            <p>Browse our full lineup and order for delivery anywhere in Indonesia.</p>
+            <a class="btn btn--primary btn--md" href="https://www.tokopedia.com/rootsandacre" target="_blank" rel="noopener">Visit our store</a>
+          </div>
+          <div class="buy-card">
+            <div class="buy-card__badge buy-card__badge--shopee">S</div>
+            <div class="buy-card__title">Shopee</div>
+            <p>Same lineup, same freshness &mdash; checkout through Shopee if that's easier for you.</p>
+            <a class="btn btn--primary btn--md" href="https://shopee.co.id/rootsandacre" target="_blank" rel="noopener">Visit our store</a>
+          </div>
+          <div class="buy-card">
+            <div class="buy-card__badge buy-card__badge--whatsapp">W</div>
+            <div class="buy-card__title">WhatsApp</div>
+            <p>Not sure what to pick? Message us directly and we'll walk you through this week's roast.</p>
+            <a class="btn btn--primary btn--md" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20memesan%20kopi.%20Bisa%20dibantu%20pilih%20lot%20minggu%20ini%3F" target="_blank" rel="noopener">Chat with us</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <p>hello@rootsandacre.com</p>
+    <!-- ====== ROASTERY NARRATIVE ====== -->
+    <section class="narrative">
+      <div class="narrative__split">
+        <div>
+          <span class="eyebrow">The sourcing</span>
+          <h2>Indonesia's finest specialty grade, <strong>one small lot at a time.</strong></h2>
+          <p class="narrative__body">We walk the farms before we ever buy a bag &mdash; sitting with the growers, tasting at the wet mill, learning how each lot was raised. The relationships come first; the coffee follows.</p>
+          <p class="narrative__quote">&ldquo;We'd rather know the name of the person who picked it than the score on the bag.&rdquo;</p>
+        </div>
+        <div class="narrative__photo-wrap">
+          <!-- Photo slot: swap the placeholder for a real grower / farm photo (4:5) -->
+          <div class="narrative__photo photo-slot"></div>
+          <div class="narrative__info-card">
+            <div class="narrative__info-label">Grown by</div>
+            <div class="narrative__info-name">Pak Asep &amp; the Mekarsaluyu growers</div>
+            <div class="narrative__info-meta">West Java &middot; 1,400m</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Philosophy pillars -->
+      <div class="pillars">
+        <div class="pillars__grid">
+          <div class="pillar">
+            <div class="pillar__num">01</div>
+            <h3>Traceability</h3>
+            <p>Every lot names the grower, the village, and the wet mill. We buy what we have walked.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">02</div>
+            <h3>Micro-batch Roasting</h3>
+            <p>9kg at a time, profiled by hand. Small enough to chase the sweetness in each origin.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">03</div>
+            <h3>Sensory Excellence</h3>
+            <p>Cupped, scored, and dialled in our lab before a single bag reaches the bar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== TORN SEAM → BAR & LAB ====== -->
+    <div class="torn torn--cream-to-dark" aria-hidden="true"></div>
+    <section id="bar-lab" class="bar-lab">
+      <span class="bar-lab__shape-dashed" aria-hidden="true"></span>
+      <span class="bar-lab__shape-triangle" aria-hidden="true"></span>
+      <span class="bar-lab__shape-pill" aria-hidden="true"></span>
+      <span class="bar-lab__shape-quarter" aria-hidden="true"></span>
+      <div class="bar-lab__inner">
+        <span class="eyebrow eyebrow--on-dark">The Bar &amp; Lab</span>
+        <h2>Twelve seats. One pour at a time.</h2>
+        <p>Our reservation-only slow bar seats twelve. Each session is a guided journey through the week's lots &mdash; brewed slowly, talked through gently.</p>
+        <a class="btn btn--gold btn--lg" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20reservasi%20kursi%20di%20Bar%20%26%20Lab.%0A%0ATanggal%3A%20%0AJam%3A%20%0AJumlah%20orang%3A%20%0A%0ATerima%20kasih!" target="_blank" rel="noopener">Reserve a Slow Bar Seat</a>
+      </div>
+    </section>
+
+    <!-- ====== TORN SEAM → WHOLESALE ====== -->
+    <div class="torn torn--dark-to-mid" aria-hidden="true"></div>
+    <section id="wholesale" class="wholesale">
+      <span class="wholesale__shape-circle" aria-hidden="true"></span>
+      <span class="wholesale__shape-square" aria-hidden="true"></span>
+      <div class="wholesale__split">
+        <div class="wholesale__copy">
+          <span class="eyebrow eyebrow--on-dark">For caf&eacute;s &amp; green buyers</span>
+          <h2>Pour our origins<br /><strong>in your house.</strong></h2>
+          <p>International caf&eacute; owners and green buyers &mdash; we'll send a curated export sample kit of this season's lots, with full traceability sheets and roast notes.</p>
+        </div>
+        <div class="wholesale__card">
+          <div class="wholesale__ships">
+            <span class="hand-note">ships worldwide</span>
+          </div>
+          <div class="wholesale__card-title">Let's talk wholesale</div>
+          <p>Five 100g samples &middot; traceability dossier &middot; indicative FOB pricing. No cost for qualified buyers.</p>
+          <div class="wholesale__actions">
+            <a class="btn btn--gold btn--lg" href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20dari%20%5Bnama%20kafe%2Fperusahaan%5D%2C%20tertarik%20dengan%20sample%20kit%20wholesale%2Fexport." target="_blank" rel="noopener">Message us on WhatsApp</a>
+            <a class="wholesale__email" href="mailto:wholesale@rootsandacre.co">or email wholesale@rootsandacre.co</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- ====== FOOTER ====== -->
   <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Roots &amp; Acre. All rights reserved.</p>
+    <div class="site-footer__grid">
+      <div>
+        <img class="site-footer__logo" src="/assets/logo-full-apricot-trans.png" alt="Roots and Acre Coffee Roastery" />
+        <p class="site-footer__mission">The bridge between Indonesia's coffee farmers and the people who love what they grow.</p>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">Explore</div>
+        <a href="#top">The Story</a>
+        <a href="#buy">Buy the Harvest</a>
+        <a href="#bar-lab">The Bar &amp; Lab</a>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">Visit</div>
+        <a href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20ingin%20reservasi%20kursi%20di%20Bar%20%26%20Lab.%0A%0ATanggal%3A%20%0AJam%3A%20%0AJumlah%20orang%3A%20%0A%0ATerima%20kasih!" target="_blank" rel="noopener">Reserve a seat</a>
+        <a href="#bar-lab">Opening hours</a>
+        <a href="#bar-lab">Find us in Jakarta</a>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">Wholesale</div>
+        <a href="#wholesale">For caf&eacute;s &amp; buyers</a>
+        <a href="https://wa.me/6281200001234?text=Halo%20Roots%20%26%20Acre!%20Saya%20dari%20%5Bnama%20kafe%2Fperusahaan%5D%2C%20tertarik%20dengan%20sample%20kit%20wholesale%2Fexport." target="_blank" rel="noopener">Get in touch</a>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>&copy; 2026 Roots &amp; Acre &middot; Jakarta, Indonesia</span>
+      <span>Reservation-only slow bar &middot; Micro-roastery</span>
+    </div>
   </footer>
-
-  <script src="/js/main.js"></script>
 </body>
 </html>
