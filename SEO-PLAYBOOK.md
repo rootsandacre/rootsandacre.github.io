@@ -58,20 +58,20 @@ Until a row is filled, use `PLACEHOLDER-<KEY>` in content/schema and log it in
 
 | Key | Value | Used in |
 |---|---|---|
-| `LEGAL-NAME` | ? (e.g. "Roots & Acre" / PT name) | schema `name`/`legalName` |
-| `ADDRESS` | ? (street, kelurahan, city, postcode) | footer NAP, schema, GBP |
-| `GEO` | ? (lat, lng) | schema GeoCoordinates |
-| `WHATSAPP` | ? (currently placeholder `6281200001234` in index.html + i18n.js) | all CTAs, schema `telephone` |
-| `EMAIL` | ? — ⚠️ site says `wholesale@rootsandacre.co` but domain is `rootsandacre.com`; confirm .co vs .com | wholesale section, schema |
-| `HOURS` | ? (per-day, incl. reservation-only note) | visible hours block, schema |
-| `FOUNDING-DATE` | ? | schema Organization |
-| `FOUNDERS` | ? (public names OK?) | schema Organization |
-| `INSTAGRAM-URL` | ? | footer, `sameAs` |
-| `TOKOPEDIA-URL` | ? (currently placeholder `tokopedia.com/rootsandacre`) | buy section, `sameAs` |
-| `SHOPEE-URL` | ? (currently placeholder `shopee.co.id/rootsandacre`) | buy section, `sameAs` |
+| `LEGAL-NAME` | DEFERRED — use brand name "Roots & Acre" for now (Dan, 2026-07-14) | schema `name`/`legalName` |
+| `ADDRESS` | Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung, Kec. Tj. Priok, Jakarta Utara, DKI Jakarta 14350 | footer NAP, schema, GBP |
+| `GEO` | ≈ -6.13706, 106.86763 (street-level via OSM Nominatim for Jalan Paradise 14 — CONFIRM with Dan/GBP pin) | schema GeoCoordinates |
+| `WHATSAPP` | `6287870702024` (+62 878-7070-2024) | all CTAs, schema `telephone` |
+| `EMAIL` | `rootsandacre@gmail.com` (replaces wrong `wholesale@rootsandacre.co`) | wholesale section, schema |
+| `HOURS` | Mon–Sun, reservation-only, 4 private sessions/day: 12.00–14.00 · 14.30–16.30 · 17.00–19.00 · 19.30–21.30. Sessions are private (patrons never mixed). No walk-ins except special events. Reserve via WhatsApp or Instagram DM | visible hours block, schema |
+| `FOUNDING-DATE` | April 2024 (second anniversary was April 2026) | schema Organization |
+| `FOUNDERS` | DEFERRED — ask Dan again at next revision whether names can be published | schema Organization |
+| `INSTAGRAM-URL` | https://www.instagram.com/rootsandacre/ | footer, `sameAs` |
+| `TOKOPEDIA-URL` | https://www.tokopedia.com/roots-and-acre | buy section, `sameAs` |
+| `SHOPEE-URL` | https://shopee.co.id/rootsandacre | buy section, `sameAs` |
 | `GBP-MAPS-URL` | ? (after GBP claimed) | footer map link, `sameAs` |
-| `PRICE-RANGE` | ? (e.g. "Rp") | schema `priceRange` |
-| `OG-IMAGE` | ? — no real photo in repo; needs 1200×630 | OG/Twitter cards |
+| `PRICE-RANGE` | B2C roasted beans (187.5g bags): Rp 170.000–322.000. Slow-bar session pricing TBD | schema `priceRange` |
+| `OG-IMAGE` | DEFERRED — Dan has real photos, not ready yet; re-ask with other missing items | OG/Twitter cards |
 
 **Consistency rule:** name, address, phone must be character-identical across
 site footer, schema, GBP, Instagram bio, and marketplace store pages.
