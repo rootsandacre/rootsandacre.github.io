@@ -227,6 +227,7 @@ a:hover { color: var(--ra-green); }
   gap: 2px;
   flex: none;
 }
+.lang-switch a,
 .lang-switch button {
   font-family: var(--ra-font-display);
   font-weight: 600;
@@ -238,8 +239,10 @@ a:hover { color: var(--ra-green); }
   cursor: pointer;
   background: transparent;
   color: var(--ra-muted-on-dark);
+  text-decoration: none;
   transition: background .2s, color .2s;
 }
+.lang-switch a.is-active,
 .lang-switch button.is-active {
   background: var(--ra-gold);
   color: var(--ra-green-dark);
@@ -720,3 +723,112 @@ a:hover { color: var(--ra-green); }
   font-size: 12px;
   color: #6f877d;
 }
+
+/* ---------- VISIT (NAP + hours block in Bar & Lab) ---------- */
+.visit {
+  margin: 46px auto 0;
+  max-width: 640px;
+  text-align: left;
+  /* solid tone (cream 4% over --ra-green-dark) so the section's decorative
+     shapes stay outside the card */
+  background: #213833;
+  border: 1px solid rgba(255, 236, 211, .16);
+  border-radius: var(--ra-radius-lg);
+  padding: clamp(22px, 4vw, 32px);
+  position: relative;
+}
+.visit__title {
+  font-family: var(--ra-font-display);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ra-gold);
+  margin-bottom: 20px;
+}
+.visit__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 26px;
+}
+.visit__label {
+  font-family: var(--ra-font-display);
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ra-muted-on-dark);
+  margin-bottom: 10px;
+}
+.visit__text {
+  font-family: var(--ra-font-body);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ra-body-on-dark);
+  margin: 0 0 10px;
+}
+.visit__sessions { letter-spacing: .02em; }
+.visit__note {
+  font-family: var(--ra-font-body);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ra-muted-on-dark);
+  margin: 0;
+}
+.visit__map {
+  display: inline-block;
+  font-family: var(--ra-font-body);
+  font-size: 14px;
+  color: var(--ra-gold);
+  text-decoration: none;
+}
+.visit__map:hover { color: var(--ra-apricot); }
+
+/* ---------- FOOTER SOCIAL LINKS ---------- */
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 16px;
+}
+.site-footer__social a {
+  font-family: var(--ra-font-body);
+  font-size: 13px;
+  color: var(--ra-muted-on-dark);
+  text-decoration: none;
+  transition: color var(--ra-duration) var(--ra-ease);
+}
+.site-footer__social a:hover { color: var(--ra-gold); }
+
+/* ---------- LANGUAGE SUGGESTION BANNER (js/i18n.js) ---------- */
+.lang-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--ra-green-dark);
+  color: var(--ra-cream);
+  border: 1px solid rgba(255, 236, 211, .2);
+  border-radius: var(--ra-radius-md);
+  box-shadow: var(--ra-shadow-lg);
+  padding: 13px 16px;
+  font-family: var(--ra-font-body);
+  font-size: 14px;
+}
+.lang-banner a { color: var(--ra-gold); font-weight: 700; }
+.lang-banner a:hover { color: var(--ra-apricot); }
+.lang-banner button {
+  background: none;
+  border: none;
+  color: var(--ra-muted-on-dark);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.lang-banner button:hover { color: var(--ra-cream); }
