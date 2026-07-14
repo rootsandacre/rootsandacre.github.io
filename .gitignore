@@ -13,3 +13,6 @@ npm-debug.log*
 dist/
 .env
 .env.local
+
+# Claude Code local session config
+.claude/
