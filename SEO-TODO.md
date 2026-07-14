@@ -46,7 +46,15 @@ Log here whether Roots & Acre is mentioned and who is. Re-run monthly.
 
 ## Flagged for Bahasa Indonesia review
 
-_(none yet)_
+New ID strings written 2026-07-14 (in `scripts/build-pages.js`, `T.id`) — drafted
+to match the existing translations' tone, but should get a native read:
+
+- `meta.title`, `meta.desc`, `meta.ogTitle`, `meta.ogDesc` (ID homepage title/description)
+- `hero.para` (new entity-definition opening)
+- `barlab.para` (rewritten for the four-private-sessions fact)
+- `visit.*` (the whole visit/NAP block)
+- `footer.bottomLeft` ("meroasting sejak April 2024" — is "meroasting" the voice we want, or "me-roasting"/"menyangrai"?)
+- ID description string inside the JSON-LD schema (function `schema()`)
 
 ## Notes
 
