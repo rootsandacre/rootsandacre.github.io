@@ -6,25 +6,18 @@ See `SEO-PLAYBOOK.md` for the full plan.
 
 ## Placeholders awaiting real values
 
-Status of the Phase 0.5 business fact sheet. Until a row is filled, the site
-uses the placeholder shown (or `PLACEHOLDER-<KEY>` in new content/schema).
+The Phase 0.5 fact sheet was filled by Dan on 2026-07-14 — real values now live
+in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
 
-| Key | Status | Current placeholder |
-|---|---|---|
-| `LEGAL-NAME` | ⏳ awaiting Dan | "Roots & Acre" (brand name only) |
-| `ADDRESS` | ⏳ awaiting Dan | none on site |
-| `GEO` | ⏳ awaiting Dan | none |
-| `WHATSAPP` | ⏳ awaiting Dan | `6281200001234` (index.html + js/i18n.js) |
-| `EMAIL` | ⏳ awaiting Dan — confirm .co vs .com | `wholesale@rootsandacre.co` |
-| `HOURS` | ⏳ awaiting Dan | none |
-| `FOUNDING-DATE` | ⏳ awaiting Dan | none |
-| `FOUNDERS` | ⏳ awaiting Dan (public names OK?) | none |
-| `INSTAGRAM-URL` | ⏳ awaiting Dan | none |
-| `TOKOPEDIA-URL` | ⏳ awaiting Dan | `tokopedia.com/rootsandacre` |
-| `SHOPEE-URL` | ⏳ awaiting Dan | `shopee.co.id/rootsandacre` |
-| `GBP-MAPS-URL` | ⏳ blocked on GBP claim (see below) | none |
-| `PRICE-RANGE` | ✅ from company profile deck | drinks Rp 30.000–50.000; beans Rp 150.000–240.000 → `priceRange` "Rp 30.000–240.000" (confirm with Dan) |
-| `OG-IMAGE` | ⏳ needs a real 1200×630 photo | `assets/images/og-image.jpg` referenced but file missing |
+| Key | Status |
+|---|---|
+| `LEGAL-NAME` | ⏸ deferred by Dan — site uses brand name "Roots & Acre"; revisit if a PT name should appear in schema `legalName` |
+| `GEO` | ⚠️ approximate — `-6.13706, 106.86763` is the OSM street centroid for Jalan Paradise 14, Sunter Agung. Dan to confirm against the exact building / future GBP pin |
+| `FOUNDERS` | ⏸ deferred — ask Dan again at the next revision whether founder names may be published (schema `founder`) |
+| `GBP-MAPS-URL` | ⏳ blocked on GBP claim (see below) |
+| `SESSION-PRICING` | ⏳ slow-bar session price not yet public — bean bags (187.5g) are Rp 170.000–322.000; ask Dan when pricing the Bar & Lab pages |
+| `OG-IMAGE` | ⏳ Dan has real photos but not ready — **re-ask together with the other deferred items**. Needs 1200×630 `assets/images/og-image.jpg`; until then OG tags reference a file that must ship before launch |
+| Real photos | ⏳ same batch as OG image — `.photo-slot` divs become `<img>`/`<picture>` with EN/ID alt text when they land |
 
 ## Owner: Dan — actions outside the repo
 
