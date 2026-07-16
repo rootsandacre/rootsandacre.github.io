@@ -154,6 +154,10 @@ a:hover { color: var(--ra-green); }
 }
 .torn--cream-to-dark { background: var(--ra-cream); }
 .torn--cream-to-dark::after { background: var(--ra-green-dark); }
+/* Variant used while the cream narrative/pillars section is parked:
+   blends from the .buy background instead of cream. */
+.torn--paper-to-dark { background: #fffaf3; }
+.torn--paper-to-dark::after { background: var(--ra-green-dark); }
 .torn--dark-to-mid { background: var(--ra-green-dark); }
 .torn--dark-to-mid::after { background: var(--ra-green); }
 
