@@ -840,3 +840,65 @@ a:hover { color: var(--ra-green); }
   padding: 2px 4px;
 }
 .lang-banner button:hover { color: var(--ra-cream); }
+
+/* Torn seam variant: dark section transitioning down into the off-white
+   FAQ body (mirror of torn--paper-to-dark, which goes the other direction). */
+.torn--dark-to-paper { background: var(--ra-green-dark); }
+.torn--dark-to-paper::after { background: #fffaf3; }
+
+/* ---------- FAQ PAGE ---------- */
+.faq-hero {
+  background: var(--ra-green-dark);
+  padding: var(--ra-section-pad);
+  text-align: center;
+}
+.faq-hero h1 {
+  font-family: var(--ra-font-display);
+  font-weight: 300;
+  font-size: var(--ra-h2-size);
+  line-height: 1.1;
+  color: var(--ra-cream);
+  margin: 14px 0 16px;
+}
+.faq-hero p {
+  font-family: var(--ra-font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ra-body-on-dark);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.faq-body { background: #fffaf3; padding: var(--ra-section-pad); }
+.faq-body__inner { max-width: 780px; margin: 0 auto; }
+.faq-group { margin-bottom: clamp(40px, 6vw, 64px); }
+.faq-group:last-child { margin-bottom: 0; }
+.faq-group__label { display: block; margin-bottom: 18px; }
+.faq-item {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--ra-border);
+}
+.faq-group .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-item h2 {
+  font-family: var(--ra-font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 2.1vw, 22px);
+  line-height: 1.35;
+  color: var(--ra-heading);
+  margin: 0 0 10px;
+}
+.faq-item p {
+  font-family: var(--ra-font-body);
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--ra-text);
+  margin: 0 0 10px;
+}
+.faq-item__cta {
+  display: inline-block;
+  font-family: var(--ra-font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ra-amber-ink);
+  text-decoration: none;
+}
+.faq-item__cta:hover { color: var(--ra-green); }

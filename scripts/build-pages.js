@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /* ============================================================
    ROOTS & ACRE — page builder
-   Renders the EN (/) and ID (/id/) homepages plus sitemap.xml
-   from one template, so the two languages can never drift.
+   Renders the EN (/) and ID (/id/) homepages, the FAQ page pair
+   (/faq/, /id/faq/), and sitemap.xml from one template, so the
+   two languages can never drift.
 
    Usage:  node scripts/build-pages.js
    (No dependencies, nothing runs at deploy time — the generated
@@ -11,6 +12,9 @@
    To change copy: edit T below (both languages, same commit).
    To change business facts: edit SITE below — it is the single
    source of truth for NAP/contact values across HTML and schema.
+   To add a new page: give it a slug, add it to renderNav/renderFooter
+   if it should be linked site-wide, add it to the `outputs` array,
+   and add its slug to `PAGE_SLUGS` in renderSitemap().
    ============================================================ */
 
 'use strict';
@@ -77,6 +81,7 @@ const T = {
     'nav.buy': 'Buy the Harvest',
     'nav.barlab': 'The Bar & Lab',
     'nav.wholesale': 'Wholesale',
+    'nav.faq': 'FAQ',
     'nav.reserve': 'Reserve a Seat',
 
     'hero.eyebrow': 'Micro-roastery & slow bar · Jakarta',
@@ -153,6 +158,7 @@ const T = {
     'footer.explore1': 'The Story',
     'footer.explore2': 'Buy the Harvest',
     'footer.explore3': 'The Bar & Lab',
+    'footer.explore4': 'FAQ',
     'footer.visit': 'Visit',
     'footer.visit1': 'Reserve a seat',
     'footer.visit2': 'Hours & sessions',
@@ -166,7 +172,60 @@ const T = {
 
     'wa.reserve': 'Hi Roots & Acre! I’d like to reserve a seat at the Bar & Lab.\n\nDate: \nSession: \nNumber of guests: \n\nThank you!',
     'wa.buy': 'Hi Roots & Acre! I’d like to order some coffee. Could you help me pick this week’s lot?',
-    'wa.wholesale': 'Hi Roots & Acre! I’m from [café / company name], interested in your wholesale/export sample kit.'
+    'wa.wholesale': 'Hi Roots & Acre! I’m from [café / company name], interested in your wholesale/export sample kit.',
+
+    /* ---------- FAQ page (Phase 4) ---------- */
+    'faq.metaTitle': 'FAQ — Roots & Acre Micro-roastery & Slow Bar · Jakarta',
+    'faq.metaDesc': 'Answers about reserving a seat, buying Roots & Acre coffee beans, wholesale & export sample kits, and what makes Indonesian specialty coffee distinct — from Jakarta’s reservation-only micro-roastery and slow bar.',
+    'faq.ogTitle': 'Roots & Acre — Frequently Asked Questions',
+    'faq.ogDesc': 'Everything you need to know about visiting, buying, and sourcing from Roots & Acre — Jakarta’s reservation-only micro-roastery and slow bar.',
+    'faq.ogImageAlt': 'Roots & Acre — frequently asked questions',
+    'faq.eyebrow': 'Answers, direct',
+    'faq.h1': 'Frequently Asked Questions',
+    'faq.lede': 'Straight answers about visiting the slow bar, buying the harvest, and sourcing wholesale or export lots from Roots & Acre — Jakarta’s reservation-only micro-roastery and slow bar.',
+    'faq.breadcrumbHome': 'Home',
+    'faq.ctaReserve': 'Reserve on WhatsApp →',
+
+    'faq.group.visit': 'Visiting & Reservations',
+    'faq.group.buy': 'Buying the Beans',
+    'faq.group.wholesale': 'Wholesale & Export',
+    'faq.group.about': 'About Roots & Acre & Indonesian Coffee',
+
+    'faq.reserve.q': 'How do I reserve a seat at Roots & Acre?',
+    'faq.reserve.a': 'Message us on WhatsApp or send an Instagram DM with your preferred date and session; we’ll confirm availability and reply with the details. Roots & Acre is reservation-only, so booking ahead is the only way to secure a seat at the slow bar.',
+    'faq.walkins.q': 'Do you take walk-ins?',
+    'faq.walkins.a': 'No — Roots & Acre’s slow bar is reservation-only, with no walk-in service except during occasional special events we announce on Instagram. Every session is private, so we don’t mix separate reservations in the same sitting; message us ahead on WhatsApp or Instagram to book a session.',
+    'faq.location.q': 'Where is Roots & Acre located?',
+    'faq.location.a': 'Roots & Acre’s roastery and slow bar are at Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung, Tanjung Priok, Jakarta Utara, DKI Jakarta 14350.',
+    'faq.groupSize.q': 'How many guests can I bring to a session?',
+    'faq.groupSize.a': 'Each slow bar session is private and exclusive to your reservation — up to twelve guests can be seated at once. Let us know your group size on WhatsApp when you book so we can prepare the right pours.',
+    'faq.sessionFlow.q': 'What happens during a slow bar session?',
+    'faq.sessionFlow.a': 'Each of our four daily sessions is a guided pour-over journey through that week’s lots, led by our team at a twelve-seat bar — brewed slowly and talked through gently, never rushed and never shared with another group.',
+
+    'faq.whereBuy.q': 'Where can I buy Roots & Acre coffee beans?',
+    'faq.whereBuy.a': 'Our roasted beans are stocked on Tokopedia and Shopee for delivery anywhere in Indonesia, or you can order directly by messaging us on WhatsApp — we’ll help you pick this week’s roast and arrange payment and shipping.',
+    'faq.shipInternational.q': 'Do you ship outside Indonesia?',
+    'faq.shipInternational.a': 'Our retail beans currently ship only within Indonesia, via Tokopedia and Shopee. For cafés and green buyers outside Indonesia, our wholesale and export sample kits do ship worldwide — reach out on WhatsApp or email to arrange one.',
+    'faq.price.q': 'How much do Roots & Acre coffee beans cost?',
+    'faq.price.a': 'Our 187.5g bags of roasted single-origin coffee currently range from Rp 170.000 to Rp 322.000, depending on the lot. Check Tokopedia or Shopee for this week’s exact lineup and pricing, or message us on WhatsApp for a recommendation.',
+
+    'faq.wholesaleSupply.q': 'Does Roots & Acre supply cafés?',
+    'faq.wholesaleSupply.a': 'Yes — we work with café owners and green buyers through wholesale and export sample kits, sent with full traceability sheets and roast notes so you can evaluate a lot before committing to a larger order.',
+    'faq.exportGreen.q': 'Do you export green coffee?',
+    'faq.exportGreen.a': 'Yes. Alongside roasted wholesale lots, we offer green coffee for export to buyers outside Indonesia, with indicative FOB pricing provided once we understand your volume and lot preferences — message us on WhatsApp to start the conversation.',
+    'faq.sampleKit.q': 'How do I request a wholesale sample kit?',
+    'faq.sampleKit.a': 'Message us on WhatsApp or email us with your café or company name, and we’ll send a curated kit of five 100g samples from this season’s lots, along with a traceability dossier and indicative FOB pricing — free for qualified buyers.',
+
+    'faq.whatIsSlowBar.q': 'What is a slow bar?',
+    'faq.whatIsSlowBar.a': 'A slow bar is a reservation-only coffee bar built around unhurried, hand-poured brewing — usually pour-over or similar manual methods — rather than fast counter service. At Roots & Acre, each private session walks guests through that week’s lots one cup at a time, with no other tables sharing the room.',
+    'faq.microRoastery.q': 'What does "micro-roastery" mean, and how is Roots & Acre one?',
+    'faq.microRoastery.a': 'A micro-roastery roasts coffee in small batches rather than large industrial runs, allowing closer control over each lot’s profile. Roots & Acre roasts by hand in roughly 9kg batches — small enough to chase the specific sweetness and character of each single origin rather than blending for consistency at scale.',
+    'faq.howSource.q': 'How does Roots & Acre source its coffee?',
+    'faq.howSource.a': 'We buy directly from growers rather than through brokers, visiting farms and wet mills before committing to a lot so we know exactly how it was grown and processed. We currently work with more than twenty farmer groups and cooperatives across Indonesia, prioritizing small lots with room to grow and processors with honest, traceable post-harvest practices.',
+    'faq.whatMakesIndoDifferent.q': 'What makes Indonesian specialty coffee different?',
+    'faq.whatMakesIndoDifferent.a': 'Indonesia’s volcanic highlands and equatorial climate produce an unusually wide range of flavor profiles across a small number of islands, and much of the archipelago still uses wet-hulling (giling basah), a processing method rarely seen outside Indonesia that gives many Indonesian coffees their heavier body and earthy, low-acid character.',
+    'faq.regions.q': 'What coffee-growing regions does Indonesia have?',
+    'faq.regions.a': 'Indonesia grows specialty coffee across a wide range of islands and elevations, including Aceh’s Gayo highlands, North Sumatra’s Lintong area, West Java, Bali’s Kintamani highlands, Flores, Toraja in South Sulawesi, and parts of Papua — each with its own elevation range, common processing methods, and flavor tendencies.'
   },
   id: {
     'meta.title': 'Roots & Acre — Roastery Kopi Specialty & Slow Bar · Jakarta',
@@ -181,6 +240,7 @@ const T = {
     'nav.buy': 'Beli Hasil Panen',
     'nav.barlab': 'The Bar & Lab',
     'nav.wholesale': 'Grosir',
+    'nav.faq': 'Pertanyaan Umum',
     'nav.reserve': 'Reservasi Kursi',
 
     'hero.eyebrow': 'Micro-roastery & slow bar · Jakarta',
@@ -257,6 +317,7 @@ const T = {
     'footer.explore1': 'Kisah Kami',
     'footer.explore2': 'Beli Hasil Panen',
     'footer.explore3': 'The Bar & Lab',
+    'footer.explore4': 'Pertanyaan Umum',
     'footer.visit': 'Kunjungi',
     'footer.visit1': 'Reservasi kursi',
     'footer.visit2': 'Jam & sesi',
@@ -270,20 +331,105 @@ const T = {
 
     'wa.reserve': 'Halo Roots & Acre! Saya ingin reservasi kursi di Bar & Lab.\n\nTanggal: \nSesi: \nJumlah orang: \n\nTerima kasih!',
     'wa.buy': 'Halo Roots & Acre! Saya ingin memesan kopi. Bisa dibantu pilih lot minggu ini?',
-    'wa.wholesale': 'Halo Roots & Acre! Saya dari [nama kafe/perusahaan], tertarik dengan sample kit wholesale/export.'
+    'wa.wholesale': 'Halo Roots & Acre! Saya dari [nama kafe/perusahaan], tertarik dengan sample kit wholesale/export.',
+
+    /* ---------- FAQ page (Phase 4) ---------- */
+    'faq.metaTitle': 'FAQ — Roots & Acre Micro-roastery & Slow Bar · Jakarta',
+    'faq.metaDesc': 'Jawaban soal reservasi kursi, membeli biji kopi Roots & Acre, sample kit wholesale & ekspor, dan apa yang membuat kopi specialty Indonesia berbeda — dari micro-roastery dan slow bar khusus reservasi di Jakarta.',
+    'faq.ogTitle': 'Roots & Acre — Pertanyaan yang Sering Diajukan',
+    'faq.ogDesc': 'Semua yang perlu kamu tahu soal berkunjung, membeli, dan sourcing dari Roots & Acre — micro-roastery dan slow bar khusus reservasi di Jakarta.',
+    'faq.ogImageAlt': 'Roots & Acre — pertanyaan yang sering diajukan',
+    'faq.eyebrow': 'Jawaban langsung',
+    'faq.h1': 'Pertanyaan yang Sering Diajukan',
+    'faq.lede': 'Jawaban langsung soal reservasi slow bar, membeli hasil panen, serta sample kit wholesale & ekspor dari Roots & Acre — micro-roastery dan slow bar khusus reservasi di Jakarta.',
+    'faq.breadcrumbHome': 'Beranda',
+    'faq.ctaReserve': 'Reservasi via WhatsApp →',
+
+    'faq.group.visit': 'Kunjungan & Reservasi',
+    'faq.group.buy': 'Membeli Biji Kopi',
+    'faq.group.wholesale': 'Grosir & Ekspor',
+    'faq.group.about': 'Tentang Roots & Acre & Kopi Indonesia',
+
+    'faq.reserve.q': 'Bagaimana cara reservasi kursi di Roots & Acre?',
+    'faq.reserve.a': 'Chat kami di WhatsApp atau kirim DM Instagram dengan tanggal dan sesi yang kamu inginkan; kami akan konfirmasi ketersediaannya dan membalas dengan detailnya. Roots & Acre khusus reservasi, jadi memesan lebih dulu adalah satu-satunya cara untuk mengamankan kursi di slow bar kami.',
+    'faq.walkins.q': 'Apakah bisa walk-in tanpa reservasi?',
+    'faq.walkins.a': 'Tidak — slow bar kami khusus reservasi, tanpa layanan walk-in kecuali saat acara khusus yang kami umumkan di Instagram. Setiap sesi bersifat privat, jadi kami tidak menggabungkan reservasi berbeda dalam satu sesi; chat kami lebih dulu di WhatsApp atau Instagram untuk booking sesi.',
+    'faq.location.q': 'Di mana lokasi Roots & Acre?',
+    'faq.location.a': 'Roastery dan slow bar Roots & Acre berada di Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung, Tanjung Priok, Jakarta Utara, DKI Jakarta 14350.',
+    'faq.groupSize.q': 'Berapa banyak tamu yang bisa saya bawa dalam satu sesi?',
+    'faq.groupSize.a': 'Setiap sesi slow bar bersifat privat dan eksklusif untuk reservasimu — hingga dua belas tamu bisa duduk sekaligus. Beri tahu jumlah rombonganmu saat booking di WhatsApp supaya kami bisa menyiapkan seduhan yang tepat.',
+    'faq.sessionFlow.q': 'Apa yang terjadi selama sesi slow bar?',
+    'faq.sessionFlow.a': 'Setiap sesi dari empat sesi harian kami adalah perjalanan pour-over terpandu menjelajahi lot minggu itu, dipandu langsung oleh tim kami di bar berkapasitas dua belas kursi — diseduh perlahan dan dijelaskan dengan santai, tanpa terburu-buru dan tanpa digabung dengan rombongan lain.',
+
+    'faq.whereBuy.q': 'Di mana saya bisa membeli biji kopi Roots & Acre?',
+    'faq.whereBuy.a': 'Biji kopi roasting kami tersedia di Tokopedia dan Shopee untuk pengiriman ke seluruh Indonesia, atau kamu bisa pesan langsung dengan chat kami di WhatsApp — kami bantu pilihkan roast minggu ini serta atur pembayaran dan pengirimannya.',
+    'faq.shipInternational.q': 'Apakah kalian kirim ke luar Indonesia?',
+    'faq.shipInternational.a': 'Biji kopi retail kami saat ini hanya dikirim dalam Indonesia, lewat Tokopedia dan Shopee. Untuk kafe dan pembeli green bean di luar Indonesia, sample kit wholesale dan ekspor kami memang kirim ke seluruh dunia — hubungi kami via WhatsApp atau email untuk mengaturnya.',
+    'faq.price.q': 'Berapa harga biji kopi Roots & Acre?',
+    'faq.price.a': 'Kemasan 187.5g biji kopi single origin kami saat ini berkisar Rp 170.000 hingga Rp 322.000, tergantung lot-nya. Cek Tokopedia atau Shopee untuk lineup dan harga minggu ini, atau chat kami di WhatsApp kalau ingin rekomendasi.',
+
+    'faq.wholesaleSupply.q': 'Apakah Roots & Acre memasok kopi untuk kafe?',
+    'faq.wholesaleSupply.a': 'Ya — kami bekerja sama dengan pemilik kafe dan pembeli green bean lewat sample kit wholesale dan ekspor, dikirim lengkap dengan lembar traceability dan catatan roast supaya kamu bisa mengevaluasi satu lot sebelum melakukan pemesanan lebih besar.',
+    'faq.exportGreen.q': 'Apakah kalian ekspor green bean?',
+    'faq.exportGreen.a': 'Ya. Selain lot wholesale yang sudah di-roasting, kami juga menyediakan green bean untuk ekspor ke pembeli di luar Indonesia, dengan indikasi harga FOB setelah kami memahami volume dan preferensi lot-mu — chat kami di WhatsApp untuk memulai obrolannya.',
+    'faq.sampleKit.q': 'Bagaimana cara meminta sample kit wholesale?',
+    'faq.sampleKit.a': 'Chat kami di WhatsApp atau kirim email dengan nama kafe atau perusahaanmu, dan kami akan kirimkan kit berisi lima sample 100g dari lot musim ini, lengkap dengan dokumen traceability dan indikasi harga FOB — tanpa biaya untuk pembeli yang memenuhi kriteria.',
+
+    'faq.whatIsSlowBar.q': 'Apa itu slow bar?',
+    'faq.whatIsSlowBar.a': 'Slow bar adalah bar kopi khusus reservasi yang dibangun di atas proses seduh manual yang tidak terburu-buru — biasanya pour-over atau metode manual sejenis — bukan layanan counter cepat. Di Roots & Acre, setiap sesi privat mengajak tamu menjelajahi lot minggu itu satu cangkir demi satu cangkir, tanpa meja lain untuk berbagi ruangan.',
+    'faq.microRoastery.q': 'Apa arti "micro-roastery", dan bagaimana Roots & Acre menjadi salah satunya?',
+    'faq.microRoastery.a': 'Micro-roastery me-roasting kopi dalam batch kecil, bukan produksi industri berskala besar, sehingga profil tiap lot bisa dikontrol lebih dekat. Roots & Acre meracik secara manual dalam batch sekitar 9kg, cukup kecil untuk mengejar rasa manis dan karakter khas tiap single origin, bukan mencampurnya demi konsistensi skala besar.',
+    'faq.howSource.q': 'Bagaimana cara Roots & Acre bersumber kopinya?',
+    'faq.howSource.a': 'Kami membeli langsung dari petani, bukan lewat broker, mengunjungi kebun dan wet mill sebelum memutuskan membeli satu lot supaya kami tahu persis bagaimana kopi itu ditanam dan diproses. Saat ini kami bekerja sama dengan lebih dari dua puluh kelompok tani dan koperasi di seluruh Indonesia, memprioritaskan small lot dengan potensi tumbuh dan prosesor dengan praktik pasca-panen yang jujur dan terlacak.',
+    'faq.whatMakesIndoDifferent.q': 'Apa yang membuat kopi specialty Indonesia berbeda?',
+    'faq.whatMakesIndoDifferent.a': 'Dataran tinggi vulkanik dan iklim khatulistiwa Indonesia menghasilkan variasi profil rasa yang luar biasa beragam dari sejumlah kecil pulau, dan sebagian besar Nusantara masih menggunakan giling basah (wet-hulling), metode pemrosesan yang jarang ditemukan di luar Indonesia dan memberi banyak kopi Indonesia body yang lebih berat serta karakter earthy dengan keasaman rendah.',
+    'faq.regions.q': 'Daerah mana saja penghasil kopi specialty di Indonesia?',
+    'faq.regions.a': 'Indonesia menanam kopi specialty di berbagai pulau dan ketinggian, termasuk dataran tinggi Gayo di Aceh, kawasan Lintong di Sumatra Utara, Jawa Barat, dataran tinggi Kintamani di Bali, Flores, Toraja di Sulawesi Selatan, hingga sebagian Papua — masing-masing dengan rentang ketinggian, metode proses umum, dan kecenderungan rasa tersendiri.'
   }
 };
 
+/* ---------- FAQ content order (language-independent metadata) ----------
+   Each item pulls its q/a text from T via `faq.<id>.q` / `faq.<id>.a`.
+   `cta`, if present, adds one action link under the answer. */
+
+const FAQ_ITEMS = [
+  { id: 'reserve', group: 'visit', cta: { type: 'wa', msgKey: 'reserve', labelKey: 'faq.ctaReserve' } },
+  { id: 'walkins', group: 'visit' },
+  { id: 'location', group: 'visit', cta: { type: 'maps' } },
+  { id: 'groupSize', group: 'visit' },
+  { id: 'sessionFlow', group: 'visit' },
+
+  { id: 'whereBuy', group: 'buy', cta: { type: 'wa', msgKey: 'buy', labelKey: 'buy.whatsapp.cta' } },
+  { id: 'shipInternational', group: 'buy' },
+  { id: 'price', group: 'buy' },
+
+  { id: 'wholesaleSupply', group: 'wholesale' },
+  { id: 'exportGreen', group: 'wholesale' },
+  { id: 'sampleKit', group: 'wholesale', cta: { type: 'wa', msgKey: 'wholesale', labelKey: 'wholesale.cta' } },
+
+  { id: 'whatIsSlowBar', group: 'about' },
+  { id: 'microRoastery', group: 'about' },
+  { id: 'howSource', group: 'about' },
+  { id: 'whatMakesIndoDifferent', group: 'about' },
+  { id: 'regions', group: 'about' }
+];
+
+const FAQ_GROUP_ORDER = ['visit', 'buy', 'wholesale', 'about'];
+
 /* ---------- Helpers ---------- */
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
 
 function makeT(lang) {
   return function t(key) {
     const v = T[lang][key];
     if (v === undefined) throw new Error(`Missing translation "${key}" for "${lang}"`);
-    return v
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+    return escapeHtml(v);
   };
 }
 
@@ -291,74 +437,241 @@ function wa(lang, msgKey) {
   return `https://wa.me/${SITE.waNumber}?text=${encodeURIComponent(T[lang]['wa.' + msgKey])}`;
 }
 
+// slug: '' for home, 'faq/' for the FAQ pair, etc. — always '' or ends in '/'.
+function pageUrl(lang, slug) {
+  return lang === 'en' ? `${SITE.origin}/${slug}` : `${SITE.origin}/id/${slug}`;
+}
+
+// Root-relative equivalent of pageUrl(lang, ''), for in-page nav/footer links.
+function homeHref(lang) {
+  return lang === 'en' ? '/' : '/id/';
+}
+
 /* ---------- Structured data (Phase 3) ---------- */
 
-function schema(lang, pageUrl) {
-  const t = (k) => T[lang][k]; // raw (JSON handles escaping)
+function businessNode(lang) {
   const description = lang === 'en'
     ? 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in Sunter, North Jakarta. It roasts single-origin lots sourced directly from farms across the archipelago in micro-batches, serves them in four private daily slow-bar sessions (reserve via WhatsApp or Instagram DM), and ships beans via Tokopedia and Shopee.'
     : 'Roots & Acre adalah micro-roastery Indonesia dan slow bar khusus reservasi di Sunter, Jakarta Utara. Kami me-roasting lot single origin yang bersumber langsung dari kebun di seluruh Nusantara dalam batch kecil, menyajikannya dalam empat sesi slow bar privat setiap hari (reservasi via WhatsApp atau DM Instagram), dan mengirim biji kopi via Tokopedia dan Shopee.';
+  return {
+    '@type': ['CafeOrCoffeeShop', 'OnlineStore'],
+    '@id': `${SITE.origin}/#business`,
+    name: SITE.name,
+    alternateName: SITE.altName,
+    description,
+    url: `${SITE.origin}/`,
+    logo: `${SITE.origin}${SITE.logo}`,
+    image: `${SITE.origin}${SITE.logo}`,
+    telephone: `+${SITE.waNumber}`,
+    email: SITE.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.address.street,
+      addressLocality: SITE.address.locality,
+      addressRegion: SITE.address.region,
+      postalCode: SITE.address.postalCode,
+      addressCountry: SITE.address.country
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: SITE.geo.lat,
+      longitude: SITE.geo.lng
+    },
+    hasMap: SITE.mapsUrl,
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '12:00',
+      closes: '21:30'
+    }],
+    acceptsReservations: 'True',
+    servesCuisine: 'Specialty coffee',
+    priceRange: SITE.priceRange,
+    currenciesAccepted: 'IDR',
+    foundingDate: SITE.foundingDate,
+    sameAs: [SITE.instagram, SITE.tokopedia, SITE.shopee]
+  };
+}
+
+function websiteNode() {
+  return {
+    '@type': 'WebSite',
+    '@id': `${SITE.origin}/#website`,
+    url: `${SITE.origin}/`,
+    name: SITE.name,
+    inLanguage: ['en', 'id'],
+    publisher: { '@id': `${SITE.origin}/#business` }
+  };
+}
+
+function webPageNode(lang, url, name, description) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: lang,
+    isPartOf: { '@id': `${SITE.origin}/#website` },
+    about: { '@id': `${SITE.origin}/#business` }
+  };
+}
+
+function schema(lang, url) {
+  const t = (k) => T[lang][k]; // raw text — JSON.stringify handles escaping
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': [
+      businessNode(lang),
+      websiteNode(),
+      webPageNode(lang, url, t('meta.title'), t('meta.desc'))
+    ]
+  }, null, 2);
+}
+
+function faqSchema(lang, url) {
+  const t = (k) => T[lang][k]; // raw text — JSON.stringify handles escaping
+  const mainEntity = FAQ_ITEMS.map((item) => ({
+    '@type': 'Question',
+    name: t(`faq.${item.id}.q`),
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: t(`faq.${item.id}.a`)
+    }
+  }));
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      businessNode(lang),
+      websiteNode(),
+      webPageNode(lang, url, t('faq.metaTitle'), t('faq.metaDesc')),
       {
-        '@type': ['CafeOrCoffeeShop', 'OnlineStore'],
-        '@id': `${SITE.origin}/#business`,
-        name: SITE.name,
-        alternateName: SITE.altName,
-        description,
-        url: `${SITE.origin}/`,
-        logo: `${SITE.origin}${SITE.logo}`,
-        image: `${SITE.origin}${SITE.logo}`,
-        telephone: `+${SITE.waNumber}`,
-        email: SITE.email,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: SITE.address.street,
-          addressLocality: SITE.address.locality,
-          addressRegion: SITE.address.region,
-          postalCode: SITE.address.postalCode,
-          addressCountry: SITE.address.country
-        },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: SITE.geo.lat,
-          longitude: SITE.geo.lng
-        },
-        hasMap: SITE.mapsUrl,
-        openingHoursSpecification: [{
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-          opens: '12:00',
-          closes: '21:30'
-        }],
-        acceptsReservations: 'True',
-        servesCuisine: 'Specialty coffee',
-        priceRange: SITE.priceRange,
-        currenciesAccepted: 'IDR',
-        foundingDate: SITE.foundingDate,
-        sameAs: [SITE.instagram, SITE.tokopedia, SITE.shopee]
+        '@type': 'FAQPage',
+        '@id': `${url}#faqpage`,
+        mainEntity
       },
       {
-        '@type': 'WebSite',
-        '@id': `${SITE.origin}/#website`,
-        url: `${SITE.origin}/`,
-        name: SITE.name,
-        inLanguage: ['en', 'id'],
-        publisher: { '@id': `${SITE.origin}/#business` }
-      },
-      {
-        '@type': 'WebPage',
-        '@id': `${pageUrl}#webpage`,
-        url: pageUrl,
-        name: t('meta.title'),
-        description: t('meta.desc'),
-        inLanguage: lang,
-        isPartOf: { '@id': `${SITE.origin}/#website` },
-        about: { '@id': `${SITE.origin}/#business` }
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: t('faq.breadcrumbHome'), item: pageUrl(lang, '') },
+          { '@type': 'ListItem', position: 2, name: t('nav.faq'), item: url }
+        ]
       }
     ]
   }, null, 2);
+}
+
+/* ---------- Shared chrome: <head> tags, nav, footer ---------- */
+
+function renderHeadCommon(lang, { slug, title, desc, ogTitle, ogDesc, ogImageAlt, schemaJson }) {
+  const url = pageUrl(lang, slug);
+  const locale = lang === 'en' ? 'en_US' : 'id_ID';
+  const altLocale = lang === 'en' ? 'id_ID' : 'en_US';
+  return `  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+  <meta name="description" content="${desc}" />
+  <meta name="theme-color" content="${SITE.themeColor}" />
+
+  <link rel="canonical" href="${url}" />
+  <link rel="alternate" hreflang="en" href="${pageUrl('en', slug)}" />
+  <link rel="alternate" hreflang="id" href="${pageUrl('id', slug)}" />
+  <link rel="alternate" hreflang="x-default" href="${pageUrl('en', slug)}" />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:site_name" content="Roots &amp; Acre" />
+  <meta property="og:title" content="${ogTitle}" />
+  <meta property="og:description" content="${ogDesc}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="${url}" />
+  <meta property="og:locale" content="${locale}" />
+  <meta property="og:locale:alternate" content="${altLocale}" />
+  <meta property="og:image" content="${SITE.origin}${SITE.ogImage}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="${ogImageAlt}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${ogTitle}" />
+  <meta name="twitter:description" content="${ogDesc}" />
+  <meta name="twitter:image" content="${SITE.origin}${SITE.ogImage}" />
+
+  <link rel="icon" href="/assets/symbol.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=${assetVersion('assets/fonts/fonts.css')}" />
+  <link rel="stylesheet" href="/css/styles.css?v=${assetVersion('css/styles.css')}" />
+  <script src="/js/i18n.js?v=${assetVersion('js/i18n.js')}" defer></script>
+
+  <script type="application/ld+json">
+${schemaJson}
+  </script>`;
+}
+
+function renderNav(lang, slug) {
+  const t = makeT(lang);
+  const hh = homeHref(lang);
+  return `  <header class="site-nav">
+    <div class="site-nav__inner">
+      <a class="site-nav__brand" href="${hh}#top">
+        <img src="/assets/symbol.svg" alt="Roots and Acre" />
+        <span class="site-nav__wordmark">Roots &amp; Acre</span>
+      </a>
+      <nav class="site-nav__links" aria-label="${t('nav.ariaPrimary')}">
+        <a href="${hh}#top">${t('nav.story')}</a>
+        <a href="${hh}#buy">${t('nav.buy')}</a>
+        <a href="${hh}#bar-lab">${t('nav.barlab')}</a>
+        <a href="${hh}#wholesale">${t('nav.wholesale')}</a>
+        <a href="${hh}faq/">${t('nav.faq')}</a>
+      </nav>
+      <div class="site-nav__actions">
+        <nav class="lang-switch" aria-label="${t('nav.ariaLang')}">
+          <a data-lang="en" href="/${slug}"${lang === 'en' ? ' class="is-active" aria-current="page"' : ' hreflang="en"'}>EN</a>
+          <a data-lang="id" href="/id/${slug}"${lang === 'id' ? ' class="is-active" aria-current="page"' : ' hreflang="id"'}>ID</a>
+        </nav>
+        <a class="btn btn--gold btn--sm" href="${wa(lang, 'reserve')}" target="_blank" rel="noopener">${t('nav.reserve')}</a>
+      </div>
+    </div>
+  </header>`;
+}
+
+function renderFooter(lang) {
+  const t = makeT(lang);
+  const hh = homeHref(lang);
+  return `  <footer class="site-footer">
+    <div class="site-footer__grid">
+      <div>
+        <img class="site-footer__logo" src="/assets/logo-full-apricot-trans.png" alt="Roots and Acre Coffee Roastery" />
+        <p class="site-footer__mission">${t('footer.tagline')}</p>
+        <div class="site-footer__social">
+          <a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a>
+          <a href="${SITE.tokopedia}" target="_blank" rel="noopener">Tokopedia</a>
+          <a href="${SITE.shopee}" target="_blank" rel="noopener">Shopee</a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">${t('footer.explore')}</div>
+        <a href="${hh}#top">${t('footer.explore1')}</a>
+        <a href="${hh}#buy">${t('footer.explore2')}</a>
+        <a href="${hh}#bar-lab">${t('footer.explore3')}</a>
+        <a href="${hh}faq/">${t('footer.explore4')}</a>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">${t('footer.visit')}</div>
+        <a href="${wa(lang, 'reserve')}" target="_blank" rel="noopener">${t('footer.visit1')}</a>
+        <a href="${hh}#visit">${t('footer.visit2')}</a>
+        <a href="${SITE.mapsUrl}" target="_blank" rel="noopener">${t('footer.visit3')}</a>
+      </div>
+      <div class="site-footer__col">
+        <div class="site-footer__col-title">${t('footer.wholesale')}</div>
+        <a href="${hh}#wholesale">${t('footer.wholesale1')}</a>
+        <a href="${wa(lang, 'wholesale')}" target="_blank" rel="noopener">${t('footer.wholesale2')}</a>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>${t('footer.bottomLeft')}</span>
+      <span>${t('footer.bottomNote')}</span>
+    </div>
+  </footer>`;
 }
 
 /* ---------- Parked: "The Sourcing" story + philosophy pillars ----------
@@ -422,81 +735,30 @@ function renderPillars(lang) {
 `;
 }
 
-/* ---------- Page template ---------- */
+/* ---------- Page template: home ---------- */
 
 function renderHome(lang) {
   const t = makeT(lang);
-  const pageUrl = lang === 'en' ? `${SITE.origin}/` : `${SITE.origin}/id/`;
-  const locale = lang === 'en' ? 'en_US' : 'id_ID';
-  const altLocale = lang === 'en' ? 'id_ID' : 'en_US';
-
+  const url = pageUrl(lang, '');
   return `<!DOCTYPE html>
 <!-- GENERATED by scripts/build-pages.js — do not edit by hand.
      Edit the template/translations there, then run: node scripts/build-pages.js
      Both language versions are rebuilt together and must ship in the same commit. -->
 <html lang="${lang}" id="top">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${t('meta.title')}</title>
-  <meta name="description" content="${t('meta.desc')}" />
-  <meta name="theme-color" content="${SITE.themeColor}" />
-
-  <link rel="canonical" href="${pageUrl}" />
-  <link rel="alternate" hreflang="en" href="${SITE.origin}/" />
-  <link rel="alternate" hreflang="id" href="${SITE.origin}/id/" />
-  <link rel="alternate" hreflang="x-default" href="${SITE.origin}/" />
-
-  <!-- Open Graph / social preview -->
-  <meta property="og:site_name" content="Roots &amp; Acre" />
-  <meta property="og:title" content="${t('meta.ogTitle')}" />
-  <meta property="og:description" content="${t('meta.ogDesc')}" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="${pageUrl}" />
-  <meta property="og:locale" content="${locale}" />
-  <meta property="og:locale:alternate" content="${altLocale}" />
-  <meta property="og:image" content="${SITE.origin}${SITE.ogImage}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="${t('meta.ogImageAlt')}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${t('meta.ogTitle')}" />
-  <meta name="twitter:description" content="${t('meta.ogDesc')}" />
-  <meta name="twitter:image" content="${SITE.origin}${SITE.ogImage}" />
-
-  <link rel="icon" href="/assets/symbol.svg" type="image/svg+xml" />
-
-  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=${assetVersion('assets/fonts/fonts.css')}" />
-  <link rel="stylesheet" href="/css/styles.css?v=${assetVersion('css/styles.css')}" />
-  <script src="/js/i18n.js?v=${assetVersion('js/i18n.js')}" defer></script>
-
-  <script type="application/ld+json">
-${schema(lang, pageUrl)}
-  </script>
+${renderHeadCommon(lang, {
+    slug: '',
+    title: t('meta.title'),
+    desc: t('meta.desc'),
+    ogTitle: t('meta.ogTitle'),
+    ogDesc: t('meta.ogDesc'),
+    ogImageAlt: t('meta.ogImageAlt'),
+    schemaJson: schema(lang, url)
+  })}
 </head>
 <body>
   <!-- ====== NAV ====== -->
-  <header class="site-nav">
-    <div class="site-nav__inner">
-      <a class="site-nav__brand" href="#top">
-        <img src="/assets/symbol.svg" alt="Roots and Acre" />
-        <span class="site-nav__wordmark">Roots &amp; Acre</span>
-      </a>
-      <nav class="site-nav__links" aria-label="${t('nav.ariaPrimary')}">
-        <a href="#top">${t('nav.story')}</a>
-        <a href="#buy">${t('nav.buy')}</a>
-        <a href="#bar-lab">${t('nav.barlab')}</a>
-        <a href="#wholesale">${t('nav.wholesale')}</a>
-      </nav>
-      <div class="site-nav__actions">
-        <nav class="lang-switch" aria-label="${t('nav.ariaLang')}">
-          <a data-lang="en" href="/"${lang === 'en' ? ' class="is-active" aria-current="page"' : ' hreflang="en"'}>EN</a>
-          <a data-lang="id" href="/id/"${lang === 'id' ? ' class="is-active" aria-current="page"' : ' hreflang="id"'}>ID</a>
-        </nav>
-        <a class="btn btn--gold btn--sm" href="${wa(lang, 'reserve')}" target="_blank" rel="noopener">${t('nav.reserve')}</a>
-      </div>
-    </div>
-  </header>
+${renderNav(lang, '')}
 
   <main>
     <!-- ====== HERO ====== -->
@@ -648,40 +910,87 @@ ${schema(lang, pageUrl)}
   </main>
 
   <!-- ====== FOOTER ====== -->
-  <footer class="site-footer">
-    <div class="site-footer__grid">
-      <div>
-        <img class="site-footer__logo" src="/assets/logo-full-apricot-trans.png" alt="Roots and Acre Coffee Roastery" />
-        <p class="site-footer__mission">${t('footer.tagline')}</p>
-        <div class="site-footer__social">
-          <a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a>
-          <a href="${SITE.tokopedia}" target="_blank" rel="noopener">Tokopedia</a>
-          <a href="${SITE.shopee}" target="_blank" rel="noopener">Shopee</a>
-        </div>
+${renderFooter(lang)}
+</body>
+</html>
+`;
+}
+
+/* ---------- Page template: FAQ ---------- */
+
+function renderFAQ(lang) {
+  const t = makeT(lang);
+  const slug = 'faq/';
+  const url = pageUrl(lang, slug);
+
+  const ctaLabel = (item) => {
+    if (!item.cta) return '';
+    if (item.cta.type === 'maps') return t('visit.mapCta');
+    return t(item.cta.labelKey);
+  };
+  const ctaHref = (item) => {
+    if (!item.cta) return '';
+    if (item.cta.type === 'maps') return SITE.mapsUrl;
+    return wa(lang, item.cta.msgKey);
+  };
+
+  const groupsHtml = FAQ_GROUP_ORDER.map((group) => {
+    const items = FAQ_ITEMS.filter((i) => i.group === group);
+    const itemsHtml = items.map((item) => {
+      const lines = [
+        `        <div class="faq-item">`,
+        `          <h2>${t(`faq.${item.id}.q`)}</h2>`,
+        `          <p>${t(`faq.${item.id}.a`)}</p>`
+      ];
+      if (item.cta) {
+        lines.push(`          <a class="faq-item__cta" href="${ctaHref(item)}" target="_blank" rel="noopener">${ctaLabel(item)}</a>`);
+      }
+      lines.push(`        </div>`);
+      return lines.join('\n');
+    }).join('\n');
+    return `      <div class="faq-group">
+        <div class="eyebrow faq-group__label">${t(`faq.group.${group}`)}</div>
+${itemsHtml}
+      </div>`;
+  }).join('\n');
+
+  return `<!DOCTYPE html>
+<!-- GENERATED by scripts/build-pages.js — do not edit by hand.
+     Edit the template/translations there, then run: node scripts/build-pages.js
+     Both language versions are rebuilt together and must ship in the same commit. -->
+<html lang="${lang}">
+<head>
+${renderHeadCommon(lang, {
+    slug,
+    title: t('faq.metaTitle'),
+    desc: t('faq.metaDesc'),
+    ogTitle: t('faq.ogTitle'),
+    ogDesc: t('faq.ogDesc'),
+    ogImageAlt: t('faq.ogImageAlt'),
+    schemaJson: faqSchema(lang, url)
+  })}
+</head>
+<body>
+  <!-- ====== NAV ====== -->
+${renderNav(lang, slug)}
+
+  <main>
+    <section class="faq-hero">
+      <span class="eyebrow eyebrow--on-dark">${t('faq.eyebrow')}</span>
+      <h1>${t('faq.h1')}</h1>
+      <p>${t('faq.lede')}</p>
+    </section>
+
+    <div class="torn torn--dark-to-paper" aria-hidden="true"></div>
+    <section class="faq-body">
+      <div class="faq-body__inner">
+${groupsHtml}
       </div>
-      <div class="site-footer__col">
-        <div class="site-footer__col-title">${t('footer.explore')}</div>
-        <a href="#top">${t('footer.explore1')}</a>
-        <a href="#buy">${t('footer.explore2')}</a>
-        <a href="#bar-lab">${t('footer.explore3')}</a>
-      </div>
-      <div class="site-footer__col">
-        <div class="site-footer__col-title">${t('footer.visit')}</div>
-        <a href="${wa(lang, 'reserve')}" target="_blank" rel="noopener">${t('footer.visit1')}</a>
-        <a href="#visit">${t('footer.visit2')}</a>
-        <a href="${SITE.mapsUrl}" target="_blank" rel="noopener">${t('footer.visit3')}</a>
-      </div>
-      <div class="site-footer__col">
-        <div class="site-footer__col-title">${t('footer.wholesale')}</div>
-        <a href="#wholesale">${t('footer.wholesale1')}</a>
-        <a href="${wa(lang, 'wholesale')}" target="_blank" rel="noopener">${t('footer.wholesale2')}</a>
-      </div>
-    </div>
-    <div class="site-footer__bottom">
-      <span>${t('footer.bottomLeft')}</span>
-      <span>${t('footer.bottomNote')}</span>
-    </div>
-  </footer>
+    </section>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+${renderFooter(lang)}
 </body>
 </html>
 `;
@@ -689,19 +998,26 @@ ${schema(lang, pageUrl)}
 
 /* ---------- sitemap.xml ---------- */
 
+const PAGE_SLUGS = ['', 'faq/'];
+
 function renderSitemap() {
-  const alternates = `
-    <xhtml:link rel="alternate" hreflang="en" href="${SITE.origin}/"/>
-    <xhtml:link rel="alternate" hreflang="id" href="${SITE.origin}/id/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE.origin}/"/>`;
-  const urls = [`${SITE.origin}/`, `${SITE.origin}/id/`].map((loc) => `  <url>
+  const urls = [];
+  for (const slug of PAGE_SLUGS) {
+    for (const lang of ['en', 'id']) {
+      urls.push({ loc: pageUrl(lang, slug), slug });
+    }
+  }
+  const body = urls.map(({ loc, slug }) => `  <url>
     <loc>${loc}</loc>
-    <lastmod>${LASTMOD}</lastmod>${alternates}
+    <lastmod>${LASTMOD}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${pageUrl('en', slug)}"/>
+    <xhtml:link rel="alternate" hreflang="id" href="${pageUrl('id', slug)}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${pageUrl('en', slug)}"/>
   </url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls}
+${body}
 </urlset>
 `;
 }
@@ -711,6 +1027,8 @@ ${urls}
 const outputs = [
   ['index.html', renderHome('en')],
   [path.join('id', 'index.html'), renderHome('id')],
+  [path.join('faq', 'index.html'), renderFAQ('en')],
+  [path.join('id', 'faq', 'index.html'), renderFAQ('id')],
   ['sitemap.xml', renderSitemap()]
 ];
 
@@ -730,3 +1048,14 @@ if (missing.length) {
   process.exit(1);
 }
 console.log('translation keys in sync:', enKeys.length);
+
+// Sanity: every FAQ_ITEMS id must resolve to a q/a pair in both languages
+for (const item of FAQ_ITEMS) {
+  for (const lang of ['en', 'id']) {
+    if (T[lang][`faq.${item.id}.q`] === undefined || T[lang][`faq.${item.id}.a`] === undefined) {
+      console.error(`FAQ item "${item.id}" missing q/a for "${lang}"`);
+      process.exit(1);
+    }
+  }
+}
+console.log('FAQ items in sync:', FAQ_ITEMS.length);

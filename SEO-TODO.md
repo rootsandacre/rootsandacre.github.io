@@ -45,6 +45,18 @@ Log here whether Roots & Acre is mentioned and who is. Re-run monthly.
 |---|---|---|---|
 | _baseline not yet run_ | | | |
 
+## Deliberately-omitted FAQ facts (Phase 4, 2026-07-16)
+
+Two playbook-suggested FAQ questions were left out rather than answered with
+invented numbers:
+
+- **"How fresh is the coffee when it ships?"** — no confirmed roast-to-ship
+  turnaround time. Ask Dan for a real number (e.g. "ships within N days of
+  roasting") and add as `faq.freshness` in `scripts/build-pages.js`.
+- **Slow-bar session pricing** — not publicly stated anywhere on the site
+  (only the 187.5g bean bag price range is real/confirmed). Add a
+  `faq.sessionPrice` item once pricing exists.
+
 ## Flagged for Bahasa Indonesia review
 
 New ID strings written 2026-07-14 (in `scripts/build-pages.js`, `T.id`) — drafted
@@ -56,6 +68,10 @@ to match the existing translations' tone, but should get a native read:
 - `visit.*` (the whole visit/NAP block)
 - `footer.bottomLeft` ("meroasting sejak April 2024" — is "meroasting" the voice we want, or "me-roasting"/"menyangrai"?)
 - ID description string inside the JSON-LD schema (function `schema()`)
+
+New FAQ page ID strings written 2026-07-16 (all `faq.*` keys in `T.id`,
+`scripts/build-pages.js`) — 16 Q&A pairs plus intro/meta copy, drafted to
+match the existing tone but not yet reviewed by a native speaker.
 
 ## Notes
 
