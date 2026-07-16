@@ -352,12 +352,15 @@ function schema(lang, pageUrl) {
   }, null, 2);
 }
 
-/* ---------- Parked: "The Sourcing" story block ----------
+/* ---------- Parked: "The Sourcing" story + philosophy pillars ----------
    Removed from the homepage for launch (2026-07-16) — the farm stories and
-   photos exist but aren't processed yet. When the /sourcing/ page pair ships
-   (SEO-PLAYBOOK.md Phase 5.2b), reinstate this block on the homepage as a
-   teaser linking to /sourcing/. Not called at build time on purpose; its
-   translation keys stay in T so the EN/ID sync check keeps guarding them. */
+   photos exist but aren't processed yet. Dan's direction: both blocks become
+   part of a big "Roots & Acre — the process" page (working idea; could be
+   /process/ or /sourcing/ — decide when the material is ready, see
+   SEO-PLAYBOOK.md Phase 5.2b). When that page ships, reinstate a teaser on
+   the homepage linking to it. Neither function is called at build time on
+   purpose; their translation keys stay in T so the EN/ID sync check keeps
+   guarding them. */
 
 // eslint-disable-next-line no-unused-vars
 function renderSourcingStory(lang) {
@@ -376,6 +379,33 @@ function renderSourcingStory(lang) {
             <div class="narrative__info-label">${t('narrative.grownBy')}</div>
             <div class="narrative__info-name">Pak Asep &amp; the Mekarsaluyu growers</div>
             <div class="narrative__info-meta">${t('narrative.location')}</div>
+          </div>
+        </div>
+      </div>
+
+`;
+}
+
+// eslint-disable-next-line no-unused-vars
+function renderPillars(lang) {
+  const t = makeT(lang);
+  return `      <!-- Philosophy pillars -->
+      <div class="pillars">
+        <div class="pillars__grid">
+          <div class="pillar">
+            <div class="pillar__num">01</div>
+            <h3>${t('pillar1.title')}</h3>
+            <p>${t('pillar1.body')}</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">02</div>
+            <h3>${t('pillar2.title')}</h3>
+            <p>${t('pillar2.body')}</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar__num">03</div>
+            <h3>${t('pillar3.title')}</h3>
+            <p>${t('pillar3.body')}</p>
           </div>
         </div>
       </div>
@@ -543,34 +573,14 @@ ${schema(lang, pageUrl)}
       </div>
     </section>
 
-    <!-- ====== PHILOSOPHY PILLARS ======
-         (The "The Sourcing" story block that used to open this section is
-         parked in renderSourcingStory() until the /sourcing/ page ships.) -->
-    <section class="narrative">
-      <!-- Philosophy pillars -->
-      <div class="pillars">
-        <div class="pillars__grid">
-          <div class="pillar">
-            <div class="pillar__num">01</div>
-            <h3>${t('pillar1.title')}</h3>
-            <p>${t('pillar1.body')}</p>
-          </div>
-          <div class="pillar">
-            <div class="pillar__num">02</div>
-            <h3>${t('pillar2.title')}</h3>
-            <p>${t('pillar2.body')}</p>
-          </div>
-          <div class="pillar">
-            <div class="pillar__num">03</div>
-            <h3>${t('pillar3.title')}</h3>
-            <p>${t('pillar3.body')}</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- (The sourcing story + philosophy pillars that used to sit here are
+         parked in renderSourcingStory()/renderPillars() until the
+         "process" page ships — see SEO-PLAYBOOK.md Phase 5.2b.) -->
 
-    <!-- ====== TORN SEAM → BAR & LAB ====== -->
-    <div class="torn torn--cream-to-dark" aria-hidden="true"></div>
+    <!-- ====== TORN SEAM → BAR & LAB ======
+         torn--paper-to-dark matches the .buy background; switch back to
+         torn--cream-to-dark when a cream section returns above it. -->
+    <div class="torn torn--paper-to-dark" aria-hidden="true"></div>
     <section id="bar-lab" class="bar-lab">
       <span class="bar-lab__shape-dashed" aria-hidden="true"></span>
       <span class="bar-lab__shape-triangle" aria-hidden="true"></span>

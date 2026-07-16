@@ -234,14 +234,22 @@ This is the "couple notches up" layer. AI engines cite sources with unique facts
 
 1. **Per-coffee pages with proprietary data** (`/coffee/<slug>/` + ID pair). For each current release, publish what nobody else does: farm/producer name, region + elevation (masl), varietal, process, harvest window, lot size, cupping notes, roast approach, and price/availability with marketplace links. Product schema per Phase 3. Source facts from `april-2026-coffee-reference.md` in the parent folder and from Dan/B — never invent. When a coffee sells out, keep the page (mark unavailable) — it becomes the permanent archive that makes us THE reference for those farms/regions.
 2. **The flagship citable asset:** one deeply factual reference page pair, e.g. "Indonesian Specialty Coffee Regions — a roaster's field guide" (`/guide/indonesian-coffee-regions/`): every major region (Gayo, Kintamani, Toraja, Flores Bajawa, Ijen, West Java…), elevations, harvest calendars, typical processes and flavor profiles, plus first-hand sourcing observations. First-hand experience + specificity is exactly what LLM retrieval rewards, and it earns the category citations ("Perplexity, what are Indonesia's coffee regions?") that build brand authority. This is one page, not a blog commitment.
-2b. **"The Sourcing" page pair (`/sourcing/` + `/id/sourcing/`) — decided with Dan 2026-07-16.**
+2b. **The "process" page pair — decided with Dan 2026-07-16.**
    The homepage's sourcing story block (grower photo slot, "Pak Asep & the
-   Mekarsaluyu growers" card, narrative + quote) was **removed from the homepage
-   for launch** — the material (farm stories, photos) exists but isn't processed
-   yet. The three philosophy pillars stayed on the homepage. The removed block's
-   template and translations are parked in `scripts/build-pages.js`
-   (`renderSourcingStory`, unused at build time) so nothing is lost.
-   When Dan's material is ready, build it as a big storytelling page:
+   Mekarsaluyu growers" card, narrative + quote) **and the three philosophy
+   pillars** (Traceability / Micro-batch Roasting / Sensory Excellence) were
+   **removed from the homepage for launch** — the material (farm stories,
+   photos) exists but isn't processed yet. Dan's working idea: one big
+   "Roots & Acre — the process" page rather than homepage sections — the full
+   arc from sourcing (farms, criteria, farmer stories) through roasting
+   (micro-batch, profiling) to the bar (cupping, QC, slow bar). Decide the
+   final URL when the material lands (`/process/` if it covers the whole arc,
+   `/sourcing/` if it stays farm-focused) — and its ID mirror.
+   Both blocks' templates and translations are parked in
+   `scripts/build-pages.js` (`renderSourcingStory`, `renderPillars`, unused at
+   build time) so nothing is lost; the pillars become the page's natural
+   section skeleton. When Dan's material is ready, build it as a big
+   storytelling page:
    - Long-form, image-rich page pair: per-farm / per-co-op sections using the
      farmer list in the company profile deck (Kamanuru, Mekarsaluyu, Paratag,
      Rukun Saudara, Kayu Aro, Bener Meriah, Lebak Muncang, …) with names,
@@ -254,10 +262,10 @@ This is the "couple notches up" layer. AI engines cite sources with unique facts
      never CSS backgrounds.
    - Standard new-page kit: answer-first opening, hreflang pair, canonical,
      BreadcrumbList, sitemap entries, visible "last updated".
-   - Relink on ship: reinstate the parked block on the homepage as a teaser
-     linking to `/sourcing/`; retarget the nav/footer "The Story" links
-     (currently `#top`) to the new page; add it to the FAQ where relevant.
-   - Do NOT link to `/sourcing/` from anywhere until the page exists.
+   - Relink on ship: reinstate a teaser block on the homepage linking to the
+     new page; retarget the nav/footer "The Story" links (currently `#top`)
+     to it; add it to the FAQ where relevant.
+   - Do NOT link to the page from anywhere until it exists.
 3. **llms.txt** at root: brief markdown map of the site (what Roots & Acre is, key pages with one-line descriptions, both languages). Evidence it's read in production is weak (near-zero fetch rates in bot-log audits; Google says it's unnecessary) — it costs 20 minutes and is a harmless forward bet. Do it last, expect nothing.
 4. **Entity consistency sweep:** exact same business name, address, phone across site footer, schema, GBP, Instagram bio, Tokopedia/Shopee store pages, and any directory. Add an "About/colophon" block in the footer with the entity-definition sentence on every page. Log external profiles needing edits in `SEO-TODO.md` (owner: Dan).
 5. **Freshness cadence** (add to README): visible "last updated" on guide + coffee pages, `<lastmod>` bumps in sitemap on real edits, review the flagship guide quarterly. Citation priority decays measurably within weeks on stale content.
