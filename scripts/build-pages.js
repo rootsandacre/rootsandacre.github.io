@@ -17,8 +17,17 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = path.join(__dirname, '..');
+
+// Short content hash for cache-busting static assets. The query string
+// changes whenever the file changes, so browsers/CDNs can never serve a
+// stale stylesheet against fresh HTML.
+function assetVersion(relPath) {
+  const buf = fs.readFileSync(path.join(ROOT, relPath));
+  return crypto.createHash('sha256').update(buf).digest('hex').slice(0, 8);
+}
 
 /* ---------- Business facts (Phase 0.5 fact sheet) ---------- */
 
@@ -457,9 +466,9 @@ function renderHome(lang) {
 
   <link rel="icon" href="/assets/symbol.svg" type="image/svg+xml" />
 
-  <link rel="stylesheet" href="/assets/fonts/fonts.css" />
-  <link rel="stylesheet" href="/css/styles.css" />
-  <script src="/js/i18n.js" defer></script>
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=${assetVersion('assets/fonts/fonts.css')}" />
+  <link rel="stylesheet" href="/css/styles.css?v=${assetVersion('css/styles.css')}" />
+  <script src="/js/i18n.js?v=${assetVersion('js/i18n.js')}" defer></script>
 
   <script type="application/ld+json">
 ${schema(lang, pageUrl)}
