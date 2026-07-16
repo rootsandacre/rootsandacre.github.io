@@ -515,6 +515,10 @@ a:hover { color: var(--ra-green); }
 
 /* Philosophy pillars */
 .pillars { max-width: var(--ra-container); margin: clamp(40px, 7vw, 72px) auto 0; }
+/* While the sourcing story block is parked (see scripts/build-pages.js),
+   the pillars open the section — drop the separating margin. Reverts
+   automatically when the story block is reinstated above them. */
+.narrative .pillars:first-child { margin-top: 0; }
 .pillars__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

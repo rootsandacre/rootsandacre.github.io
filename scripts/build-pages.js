@@ -352,6 +352,37 @@ function schema(lang, pageUrl) {
   }, null, 2);
 }
 
+/* ---------- Parked: "The Sourcing" story block ----------
+   Removed from the homepage for launch (2026-07-16) — the farm stories and
+   photos exist but aren't processed yet. When the /sourcing/ page pair ships
+   (SEO-PLAYBOOK.md Phase 5.2b), reinstate this block on the homepage as a
+   teaser linking to /sourcing/. Not called at build time on purpose; its
+   translation keys stay in T so the EN/ID sync check keeps guarding them. */
+
+// eslint-disable-next-line no-unused-vars
+function renderSourcingStory(lang) {
+  const t = makeT(lang);
+  return `      <div class="narrative__split">
+        <div>
+          <span class="eyebrow">${t('narrative.eyebrow')}</span>
+          <h2><span>${t('narrative.titleLine1')}</span> <strong>${t('narrative.titleLine2')}</strong></h2>
+          <p class="narrative__body">${t('narrative.para')}</p>
+          <p class="narrative__quote">&ldquo;<span>${t('narrative.quote')}</span>&rdquo;</p>
+        </div>
+        <div class="narrative__photo-wrap">
+          <!-- Photo slot: swap the placeholder for a real grower / farm photo (4:5) -->
+          <div class="narrative__photo photo-slot"></div>
+          <div class="narrative__info-card">
+            <div class="narrative__info-label">${t('narrative.grownBy')}</div>
+            <div class="narrative__info-name">Pak Asep &amp; the Mekarsaluyu growers</div>
+            <div class="narrative__info-meta">${t('narrative.location')}</div>
+          </div>
+        </div>
+      </div>
+
+`;
+}
+
 /* ---------- Page template ---------- */
 
 function renderHome(lang) {
@@ -512,26 +543,10 @@ ${schema(lang, pageUrl)}
       </div>
     </section>
 
-    <!-- ====== ROASTERY NARRATIVE ====== -->
+    <!-- ====== PHILOSOPHY PILLARS ======
+         (The "The Sourcing" story block that used to open this section is
+         parked in renderSourcingStory() until the /sourcing/ page ships.) -->
     <section class="narrative">
-      <div class="narrative__split">
-        <div>
-          <span class="eyebrow">${t('narrative.eyebrow')}</span>
-          <h2><span>${t('narrative.titleLine1')}</span> <strong>${t('narrative.titleLine2')}</strong></h2>
-          <p class="narrative__body">${t('narrative.para')}</p>
-          <p class="narrative__quote">&ldquo;<span>${t('narrative.quote')}</span>&rdquo;</p>
-        </div>
-        <div class="narrative__photo-wrap">
-          <!-- Photo slot: swap the placeholder for a real grower / farm photo (4:5) -->
-          <div class="narrative__photo photo-slot"></div>
-          <div class="narrative__info-card">
-            <div class="narrative__info-label">${t('narrative.grownBy')}</div>
-            <div class="narrative__info-name">Pak Asep &amp; the Mekarsaluyu growers</div>
-            <div class="narrative__info-meta">${t('narrative.location')}</div>
-          </div>
-        </div>
-      </div>
-
       <!-- Philosophy pillars -->
       <div class="pillars">
         <div class="pillars__grid">
