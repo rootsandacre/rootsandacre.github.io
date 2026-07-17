@@ -16,7 +16,7 @@ in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
 | `FOUNDERS` | ⏸ deferred — ask Dan again at the next revision whether founder names may be published (schema `founder`) |
 | `GBP-MAPS-URL` | ⏳ blocked on GBP claim (see below) |
 | `SESSION-PRICING` | ⏳ slow-bar session price not yet public — bean bags (187.5g) are Rp 170.000–322.000; ask Dan when pricing the Bar & Lab pages |
-| `OG-IMAGE` | ⏳ Dan has real photos but not ready — **re-ask together with the other deferred items**. Needs 1200×630 `assets/images/og-image.jpg`; until then OG tags reference a file that must ship before launch |
+| `OG-IMAGE` | 🔶 branded placeholder shipped 2026-07-17 (logo on brand green, 1200×630, `assets/images/og-image.jpg`) so link previews work at launch. Swap for a real photo when Dan's material is ready — **re-ask together with the other deferred items** |
 | Real photos | ⏳ same batch as OG image — `.photo-slot` divs become `<img>`/`<picture>` with EN/ID alt text when they land |
 | `SOURCING-MATERIAL` | ⏳ farm stories + photos exist but unprocessed (Dan, 2026-07-16). Blocks the "process" page pair (playbook Phase 5.2b — URL TBD: `/process/` or `/sourcing/`). Homepage ships without the sourcing story block AND the philosophy pillars; both parked in `scripts/build-pages.js` (`renderSourcingStory`, `renderPillars`) |
 
