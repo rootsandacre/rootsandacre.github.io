@@ -198,9 +198,11 @@ const T = {
     'faq.location.q': 'Where is Roots & Acre located?',
     'faq.location.a': 'Roots & Acre’s roastery and slow bar are at Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung, Tanjung Priok, Jakarta Utara, DKI Jakarta 14350.',
     'faq.groupSize.q': 'How many guests can I bring to a session?',
-    'faq.groupSize.a': 'Each slow bar session is private and exclusive to your reservation — up to twelve guests can be seated at once. Let us know your group size on WhatsApp when you book so we can prepare the right pours.',
+    'faq.groupSize.a': 'Each reservation is for 1 to 4 guests, and every slow bar session is private — exclusive to your party, with no other reservations mixed in. Let us know your group size on WhatsApp when you book so we can prepare accordingly.',
     'faq.sessionFlow.q': 'What happens during a slow bar session?',
     'faq.sessionFlow.a': 'Each of our four daily sessions is a guided pour-over journey through that week’s lots, led by our team at a twelve-seat bar — brewed slowly and talked through gently, never rushed and never shared with another group.',
+    'faq.sessionPrice.q': 'How much does a slow bar session cost?',
+    'faq.sessionPrice.a': 'There’s no fixed session price — cost depends on which coffees are available that day and what you choose to order during your session. Message us on WhatsApp when you book and we can give you a clearer idea based on that day’s lineup.',
 
     'faq.whereBuy.q': 'Where can I buy Roots & Acre coffee beans?',
     'faq.whereBuy.a': 'Our roasted beans are stocked on Tokopedia and Shopee for delivery anywhere in Indonesia, or you can order directly by messaging us on WhatsApp — we’ll help you pick this week’s roast and arrange payment and shipping.',
@@ -357,9 +359,11 @@ const T = {
     'faq.location.q': 'Di mana lokasi Roots & Acre?',
     'faq.location.a': 'Roastery dan slow bar Roots & Acre berada di Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung, Tanjung Priok, Jakarta Utara, DKI Jakarta 14350.',
     'faq.groupSize.q': 'Berapa banyak tamu yang bisa saya bawa dalam satu sesi?',
-    'faq.groupSize.a': 'Setiap sesi slow bar bersifat privat dan eksklusif untuk reservasimu — hingga dua belas tamu bisa duduk sekaligus. Beri tahu jumlah rombonganmu saat booking di WhatsApp supaya kami bisa menyiapkan seduhan yang tepat.',
+    'faq.groupSize.a': 'Setiap reservasi berlaku untuk 1 hingga 4 tamu, dan setiap sesi slow bar bersifat privat — eksklusif untuk rombonganmu, tanpa digabung dengan reservasi lain. Beri tahu jumlah rombonganmu saat booking di WhatsApp supaya kami bisa menyiapkan sesuai kebutuhan.',
     'faq.sessionFlow.q': 'Apa yang terjadi selama sesi slow bar?',
     'faq.sessionFlow.a': 'Setiap sesi dari empat sesi harian kami adalah perjalanan pour-over terpandu menjelajahi lot minggu itu, dipandu langsung oleh tim kami di bar berkapasitas dua belas kursi — diseduh perlahan dan dijelaskan dengan santai, tanpa terburu-buru dan tanpa digabung dengan rombongan lain.',
+    'faq.sessionPrice.q': 'Berapa biaya untuk satu sesi slow bar?',
+    'faq.sessionPrice.a': 'Tidak ada harga sesi yang tetap — biayanya tergantung kopi apa yang tersedia hari itu dan apa yang kamu pesan selama sesi berlangsung. Chat kami di WhatsApp saat booking, dan kami bisa memberi gambaran lebih jelas sesuai lineup hari itu.',
 
     'faq.whereBuy.q': 'Di mana saya bisa membeli biji kopi Roots & Acre?',
     'faq.whereBuy.a': 'Biji kopi roasting kami tersedia di Tokopedia dan Shopee untuk pengiriman ke seluruh Indonesia, atau kamu bisa pesan langsung dengan chat kami di WhatsApp — kami bantu pilihkan roast minggu ini serta atur pembayaran dan pengirimannya.',
@@ -398,6 +402,7 @@ const FAQ_ITEMS = [
   { id: 'location', group: 'visit', cta: { type: 'maps' } },
   { id: 'groupSize', group: 'visit' },
   { id: 'sessionFlow', group: 'visit' },
+  { id: 'sessionPrice', group: 'visit', cta: { type: 'wa', msgKey: 'reserve', labelKey: 'faq.ctaReserve' } },
 
   { id: 'whereBuy', group: 'buy', cta: { type: 'wa', msgKey: 'buy', labelKey: 'buy.whatsapp.cta' } },
   { id: 'shipInternational', group: 'buy' },
