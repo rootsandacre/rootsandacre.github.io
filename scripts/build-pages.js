@@ -70,7 +70,7 @@ const LASTMOD = new Date().toISOString().slice(0, 10);
 const T = {
   en: {
     'meta.title': 'Roots & Acre — Micro-roastery & Slow Bar · Jakarta',
-    'meta.desc': 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in Sunter, North Jakarta. Fresh-roasted single origins from the archipelago’s finest specialty farms — on Tokopedia, Shopee, and at our twelve-seat bar.',
+    'meta.desc': 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in Sunter, North Jakarta. Fresh-roasted single origins from the archipelago’s finest specialty farms — on Tokopedia, Shopee, and at our four-seat bar.',
     'meta.ogTitle': 'Roots & Acre — Micro-roastery & Slow Bar · Jakarta',
     'meta.ogDesc': 'From the highlands to the slow bar. Indonesian micro-roastery & reservation-only slow bar in Sunter, North Jakarta.',
     'meta.ogImageAlt': 'Roots & Acre — Indonesian micro-roastery and slow bar in Jakarta',
@@ -88,7 +88,7 @@ const T = {
     'hero.badge': 'harvest vol. 04',
     'hero.titleLine1': 'From the highlands',
     'hero.titleLine2': 'to the slow bar.',
-    'hero.para': 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in North Jakarta. We walk the islands’ finest specialty farms and roast each lot by hand in micro-batches — poured at our twelve-seat slow bar, or shipped fresh to your door.',
+    'hero.para': 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in North Jakarta. We walk the islands’ finest specialty farms and roast each lot by hand in micro-batches — poured at our four-seat slow bar, or shipped fresh to your door.',
     'hero.cta1': 'Buy the Harvest',
     'hero.cta2': 'Reserve a Slow Bar Seat',
     'hero.wholesaleLink': 'Cafés & green buyers — wholesale & export inquiries',
@@ -99,7 +99,7 @@ const T = {
     'pw1.cta': 'See where to buy →',
     'pw2.eyebrow': 'The Bar & Lab',
     'pw2.title': 'Sit with us',
-    'pw2.desc': 'Twelve seats, one pour at a time — reserve on WhatsApp for our slow bar in Jakarta.',
+    'pw2.desc': 'Four seats, one pour at a time — reserve on WhatsApp for our slow bar in Jakarta.',
     'pw2.cta': 'Reserve a seat →',
     'pw3.eyebrow': 'Wholesale & export',
     'pw3.title': 'Pour us in your café',
@@ -132,8 +132,8 @@ const T = {
     'pillar3.title': 'Sensory Excellence',
     'pillar3.body': 'Cupped, scored, and dialled in our lab before a single bag reaches the bar.',
 
-    'barlab.title': 'Twelve seats. One pour at a time.',
-    'barlab.para': 'Our reservation-only slow bar seats twelve, in four private sessions a day — the room is never shared with other guests. Each session is a guided journey through the week’s lots, brewed slowly and talked through gently.',
+    'barlab.title': 'Four seats. One pour at a time.',
+    'barlab.para': 'Our reservation-only slow bar seats four, across four private sessions a day — the room is never shared with other guests. Each session is a guided journey through the week’s lots, brewed slowly and talked through gently.',
     'barlab.cta': 'Reserve a Slow Bar Seat',
 
     'visit.title': 'Visit the Bar & Lab',
@@ -200,7 +200,7 @@ const T = {
     'faq.groupSize.q': 'How many guests can I bring to a session?',
     'faq.groupSize.a': 'Each reservation is for 1 to 4 guests, and every slow bar session is private — exclusive to your party, with no other reservations mixed in. Let us know your group size on WhatsApp when you book so we can prepare accordingly.',
     'faq.sessionFlow.q': 'What happens during a slow bar session?',
-    'faq.sessionFlow.a': 'Each of our four daily sessions is a guided pour-over journey through that week’s lots, led by our team at a twelve-seat bar — brewed slowly and talked through gently, never rushed and never shared with another group.',
+    'faq.sessionFlow.a': 'Each of our four daily sessions is a guided pour-over journey through that week’s lots, led by our team at a four-seat bar — brewed slowly and talked through gently, never rushed and never shared with another group.',
     'faq.sessionPrice.q': 'How much does a slow bar session cost?',
     'faq.sessionPrice.a': 'There’s no fixed session price — cost depends on which coffees are available that day and what you choose to order during your session. Message us on WhatsApp when you book and we can give you a clearer idea based on that day’s lineup.',
 
@@ -231,7 +231,7 @@ const T = {
   },
   id: {
     'meta.title': 'Roots & Acre — Roastery Kopi Specialty & Slow Bar · Jakarta',
-    'meta.desc': 'Roots & Acre adalah micro-roastery Indonesia dan slow bar khusus reservasi di Sunter, Jakarta Utara. Single origin fresh-roasted dari kebun specialty terbaik Nusantara — di Tokopedia, Shopee, dan bar dua belas kursi kami.',
+    'meta.desc': 'Roots & Acre adalah micro-roastery Indonesia dan slow bar khusus reservasi di Sunter, Jakarta Utara. Single origin fresh-roasted dari kebun specialty terbaik Nusantara — di Tokopedia, Shopee, dan bar empat kursi kami.',
     'meta.ogTitle': 'Roots & Acre — Roastery Kopi Specialty & Slow Bar · Jakarta',
     'meta.ogDesc': 'Dari dataran tinggi menuju slow bar. Micro-roastery Indonesia & slow bar khusus reservasi di Sunter, Jakarta Utara.',
     'meta.ogImageAlt': 'Roots & Acre — micro-roastery dan slow bar Indonesia di Jakarta',
@@ -249,7 +249,7 @@ const T = {
     'hero.badge': 'panen vol. 04',
     'hero.titleLine1': 'Dari dataran tinggi',
     'hero.titleLine2': 'menuju slow bar.',
-    'hero.para': 'Roots & Acre adalah micro-roastery Indonesia sekaligus slow bar khusus reservasi di Jakarta Utara. Kami menyusuri kebun-kebun specialty terbaik di berbagai pulau, lalu meracik tiap lot secara manual dalam batch kecil — diseduh di slow bar berkapasitas dua belas kursi, atau dikirim segar ke depan pintumu.',
+    'hero.para': 'Roots & Acre adalah micro-roastery Indonesia sekaligus slow bar khusus reservasi di Jakarta Utara. Kami menyusuri kebun-kebun specialty terbaik di berbagai pulau, lalu meracik tiap lot secara manual dalam batch kecil — diseduh di slow bar berkapasitas empat kursi, atau dikirim segar ke depan pintumu.',
     'hero.cta1': 'Beli Hasil Panen',
     'hero.cta2': 'Reservasi Kursi Slow Bar',
     'hero.wholesaleLink': 'Kafe & pembeli green bean — pertanyaan grosir & ekspor',
@@ -260,7 +260,7 @@ const T = {
     'pw1.cta': 'Lihat tempat membeli →',
     'pw2.eyebrow': 'The Bar & Lab',
     'pw2.title': 'Duduk bareng kami',
-    'pw2.desc': 'Dua belas kursi, satu seduhan setiap kali — reservasi via WhatsApp untuk slow bar kami di Jakarta.',
+    'pw2.desc': 'Empat kursi, satu seduhan setiap kali — reservasi via WhatsApp untuk slow bar kami di Jakarta.',
     'pw2.cta': 'Reservasi kursi →',
     'pw3.eyebrow': 'Grosir & ekspor',
     'pw3.title': 'Sajikan kami di kafemu',
@@ -293,8 +293,8 @@ const T = {
     'pillar3.title': 'Kualitas Sensori',
     'pillar3.body': 'Di-cupping, dinilai, dan disempurnakan di lab kami sebelum satu karung pun sampai ke bar.',
 
-    'barlab.title': 'Dua belas kursi. Satu seduhan setiap kali.',
-    'barlab.para': 'Slow bar khusus reservasi kami berkapasitas dua belas kursi, dalam empat sesi privat setiap hari — ruangannya tak pernah digabung dengan tamu lain. Setiap sesi adalah perjalanan terpandu menjelajahi lot minggu ini, diseduh perlahan dan dijelaskan dengan santai.',
+    'barlab.title': 'Empat kursi. Satu seduhan setiap kali.',
+    'barlab.para': 'Slow bar khusus reservasi kami berkapasitas empat kursi, dengan empat sesi privat setiap hari — ruangannya tak pernah digabung dengan tamu lain. Setiap sesi adalah perjalanan terpandu menjelajahi lot minggu ini, diseduh perlahan dan dijelaskan dengan santai.',
     'barlab.cta': 'Reservasi Kursi Slow Bar',
 
     'visit.title': 'Kunjungi Bar & Lab',
@@ -361,7 +361,7 @@ const T = {
     'faq.groupSize.q': 'Berapa banyak tamu yang bisa saya bawa dalam satu sesi?',
     'faq.groupSize.a': 'Setiap reservasi berlaku untuk 1 hingga 4 tamu, dan setiap sesi slow bar bersifat privat — eksklusif untuk rombonganmu, tanpa digabung dengan reservasi lain. Beri tahu jumlah rombonganmu saat booking di WhatsApp supaya kami bisa menyiapkan sesuai kebutuhan.',
     'faq.sessionFlow.q': 'Apa yang terjadi selama sesi slow bar?',
-    'faq.sessionFlow.a': 'Setiap sesi dari empat sesi harian kami adalah perjalanan pour-over terpandu menjelajahi lot minggu itu, dipandu langsung oleh tim kami di bar berkapasitas dua belas kursi — diseduh perlahan dan dijelaskan dengan santai, tanpa terburu-buru dan tanpa digabung dengan rombongan lain.',
+    'faq.sessionFlow.a': 'Setiap sesi dari empat sesi harian kami adalah perjalanan pour-over terpandu menjelajahi lot minggu itu, dipandu langsung oleh tim kami di bar berkapasitas empat kursi — diseduh perlahan dan dijelaskan dengan santai, tanpa terburu-buru dan tanpa digabung dengan rombongan lain.',
     'faq.sessionPrice.q': 'Berapa biaya untuk satu sesi slow bar?',
     'faq.sessionPrice.a': 'Tidak ada harga sesi yang tetap — biayanya tergantung kopi apa yang tersedia hari itu dan apa yang kamu pesan selama sesi berlangsung. Chat kami di WhatsApp saat booking, dan kami bisa memberi gambaran lebih jelas sesuai lineup hari itu.',
 
