@@ -131,14 +131,14 @@ Tasks:
 8. **404 page:** confirm `404.html` links back home and carries the same nav (v2 audit: it currently has NO nav — add it).
 
 Acceptance:
-- [ ] `curl -s https://rootsandacre.com/robots.txt` returns the file (after deploy; locally, file exists and is valid).
-- [ ] sitemap.xml validates (well-formed XML, absolute URLs).
-- [ ] `index.html` has canonical, full OG + Twitter set; one non-empty `<h1>`.
-- [ ] Visible address + hours + Maps link on the homepage (placeholder-flagged if needed).
-- [ ] Footer carries Instagram/marketplace profile links.
-- [ ] `www.rootsandacre.com` 301-redirects to the apex domain (check DNS/GH Pages after deploy — split indexing kills small sites).
-- [ ] No render-blocking Google Fonts requests remain.
-- [ ] Lighthouse (or PageSpeed Insights after deploy): SEO ≥ 95, Performance ≥ 90 mobile.
+- [x] `curl -s https://rootsandacre.com/robots.txt` returns the file. — verified live 2026-07-27, HTTP 200.
+- [x] sitemap.xml validates (well-formed XML, absolute URLs). — verified live 2026-07-27, HTTP 200.
+- [x] `index.html` has canonical, full OG + Twitter set; one non-empty `<h1>`. — verified 2026-07-27.
+- [x] Visible address + hours + Maps link on the homepage. — three Google Maps links present, real address (no placeholders).
+- [x] Footer carries Instagram/marketplace profile links. — Instagram, Tokopedia, Shopee all linked.
+- [x] `www.rootsandacre.com` 301-redirects to the apex domain. — verified live 2026-07-27 (`www` → `https://rootsandacre.com/`).
+- [x] No render-blocking Google Fonts requests remain. — fonts self-hosted under `assets/fonts/`, no `fonts.googleapis.com`/`fonts.gstatic.com` references.
+- [x] Lighthouse/PageSpeed Insights (mobile, live): **Performance 94, Accessibility 95, Best Practices 100, SEO 100** — verified 2026-07-27. Clears the ≥95 SEO / ≥90 Performance bar. One pre-existing manual-review flag (color contrast) noted below, not introduced by recent changes.
 
 ---
 
@@ -200,9 +200,9 @@ All JSON-LD in a single `<script type="application/ld+json">` per page using `@g
 5. **`BreadcrumbList`** on all non-home pages.
 
 Acceptance:
-- [ ] JSON-LD parses, passes validator.schema.org with zero errors.
-- [ ] Google Rich Results Test (after deploy) recognizes LocalBusiness + FAQ where present.
-- [ ] Zero fabricated values; anything unknown is in `SEO-TODO.md`, not in schema.
+- [x] JSON-LD parses, passes validator.schema.org with zero errors. — verified live 2026-07-27 (homepage: WebPage/WebSite/CafeOrCoffeeShop+OnlineStore, zero errors/warnings; FAQ + both `/id/` pages hand-validated as well-formed JSON with all 17 Q&A pairs intact).
+- [x] Google Rich Results Test recognizes LocalBusiness + FAQ where present. — verified live 2026-07-27: homepage "2 valid items" (Local business, Organization); `/faq/` "3 valid items" (Breadcrumbs, Local business, Organization), zero errors. FAQPage itself doesn't surface as a distinct rich-result type per the Aug 2023 Google policy change noted above — expected, not a defect.
+- [x] Zero fabricated values; anything unknown is in `SEO-TODO.md`, not in schema.
 
 ---
 
@@ -246,6 +246,12 @@ Two facts corrected by Dan 2026-07-17: reservations are 1–4 pax per slot
 single booking's size), and slow-bar session pricing has no fixed number —
 it depends on the coffees available and ordered that day. Both now reflected
 in `faq.groupSize.a` and the new `faq.sessionPrice` item.
+
+> **Superseded 2026-07-26:** the venue figure above is wrong — the bar seats
+> **four**, not twelve (commit `7247717`). The 1–4 pax and variable-pricing
+> corrections still stand. Left in place as a record of the 07-17 decision;
+> don't read the seat number out of this paragraph. Canonical facts live in
+> `../Brand/company-facts.md` §8.
 
 Item 4 (speakable schema) skipped per the v2 caveat — negligible expected
 value, can revisit if truly trivial later.
