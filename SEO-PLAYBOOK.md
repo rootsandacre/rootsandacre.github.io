@@ -247,6 +247,12 @@ single booking's size), and slow-bar session pricing has no fixed number —
 it depends on the coffees available and ordered that day. Both now reflected
 in `faq.groupSize.a` and the new `faq.sessionPrice` item.
 
+> **Superseded 2026-07-26:** the venue figure above is wrong — the bar seats
+> **four**, not twelve (commit `7247717`). The 1–4 pax and variable-pricing
+> corrections still stand. Left in place as a record of the 07-17 decision;
+> don't read the seat number out of this paragraph. Canonical facts live in
+> `../Brand/company-facts.md` §8.
+
 Item 4 (speakable schema) skipped per the v2 caveat — negligible expected
 value, can revisit if truly trivial later.
 
