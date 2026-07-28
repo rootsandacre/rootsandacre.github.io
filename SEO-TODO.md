@@ -22,10 +22,10 @@ in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
 
 ## Owner: Dan — actions outside the repo
 
-- [ ] Verify domain in **Google Search Console** (DNS TXT record); submit
-      `sitemap.xml` once Phase 1 ships.
-- [ ] Verify in **Bing Webmaster Tools** (one-click import from GSC; Bing powers
-      ChatGPT search & Copilot retrieval).
+- [x] Verify domain in **Google Search Console** (DNS TXT record); submit
+      `sitemap.xml` once Phase 1 ships. — done 2026-07-28, `sitemap.xml` submitted.
+- [x] Verify in **Bing Webmaster Tools** (one-click import from GSC; Bing powers
+      ChatGPT search & Copilot retrieval). — done 2026-07-28, `sitemap.xml` submitted.
 - [ ] Create/claim **Google Business Profile** for the slow bar (category:
       Coffee roaster / Coffee shop). Name/address/phone must be character-identical
       to the site footer and schema.

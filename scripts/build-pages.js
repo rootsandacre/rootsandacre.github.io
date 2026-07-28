@@ -60,7 +60,8 @@ const SITE = {
   priceRange: 'Rp 170.000–322.000',
   themeColor: '#28544b',
   ogImage: '/assets/images/og-image.jpg', // real 1200×630 photo pending — see SEO-TODO.md
-  logo: '/assets/logo-full-apricot-trans.png'
+  logo: '/assets/logo-full-apricot-trans.png',
+  ga4Id: 'G-0M9TPP0BYN' // GA4 Measurement ID — referral traffic from AI search, see SEO-TODO.md
 };
 
 const LASTMOD = new Date().toISOString().slice(0, 10);
@@ -609,6 +610,15 @@ function renderHeadCommon(lang, { slug, title, desc, ogTitle, ogDesc, ogImageAlt
 
   <script type="application/ld+json">
 ${schemaJson}
+  </script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga4Id}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${SITE.ga4Id}');
   </script>`;
 }
 
