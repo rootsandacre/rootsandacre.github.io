@@ -12,7 +12,7 @@ in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
 | Key | Status |
 |---|---|
 | `LEGAL-NAME` | ⏸ deferred by Dan — site uses brand name "Roots & Acre"; revisit if a PT name should appear in schema `legalName` |
-| `GEO` | ⚠️ approximate — `-6.13706, 106.86763` is the OSM street centroid for Jalan Paradise 14, Sunter Agung. Dan to confirm against the exact building / future GBP pin |
+| `GEO` | ✅ resolved 2026-07-28 — `-6.137118, 106.867027`, taken from the building pin. The old `-6.13706, 106.86763` was an OSM street centroid ~67 m away |
 | `FOUNDERS` | ⏸ deferred — ask Dan again at the next revision whether founder names may be published (schema `founder`) |
 | `GBP-MAPS-URL` | ⏳ blocked on GBP claim (see below) |
 | `SESSION-PRICING` | ⏳ slow-bar session price not yet public — bean bags (187.5g) are Rp 170.000–322.000; ask Dan when pricing the Bar & Lab pages |
@@ -28,10 +28,20 @@ in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
       ChatGPT search & Copilot retrieval). — done 2026-07-28, `sitemap.xml` submitted.
 - [ ] Create/claim **Google Business Profile** for the slow bar (category:
       Coffee roaster / Coffee shop). Name/address/phone must be character-identical
-      to the site footer and schema.
+      to the site footer and schema. **Leave hours blank** — see below.
 - [ ] Add lightweight **analytics** (GA4 or Plausible — one script tag). Only way
       to see referral traffic from chatgpt.com / perplexity.ai / gemini.google.com.
 - [ ] Record **GEO baseline** (below), re-run monthly.
+
+### No published opening hours (decided 2026-07-28)
+
+R&A opens by reservation, not as a walk-in café. `openingHoursSpecification` was removed
+from the site's JSON-LD (`schema()` in `scripts/build-pages.js`) and the Google Business
+Profile is to be left with **no hours set**. 12:00–21:30 is only the envelope of the four
+session slots — publishing it as opening hours made Google show "Open now" for a place with
+no walk-in service. Session times remain visible on the site under the label "Sessions".
+Reinforce reservation-only on GBP via: primary category *Coffee roaster*, a description
+leading with "no walk-ins", the *Accepts reservations* attribute, and a seeded Q&A entry.
 
 ## GEO baseline
 

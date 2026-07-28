@@ -51,8 +51,9 @@ const SITE = {
     postalCode: '14350',
     country: 'ID'
   },
-  // Approximate (OSM street centroid) — confirm against GBP pin, see SEO-TODO.md
-  geo: { lat: -6.13706, lng: 106.86763 },
+  // Confirmed 2026-07-28 from the building pin. Previous value (-6.13706, 106.86763) was an
+  // OSM street centroid ~67 m away — don't reintroduce it. 6dp ≈ 0.1 m, plenty of precision.
+  geo: { lat: -6.137118, lng: 106.867027 },
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
     'Roots & Acre, Jl. Paradise 14, Blok M No.13, Sunter Agung, Tanjung Priok, Jakarta Utara 14350'
   ),
@@ -484,12 +485,11 @@ function businessNode(lang) {
       longitude: SITE.geo.lng
     },
     hasMap: SITE.mapsUrl,
-    openingHoursSpecification: [{
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '12:00',
-      closes: '21:30'
-    }],
+    // No openingHoursSpecification on purpose. The 12.00–21.30 window is the envelope of
+    // four reservation-only session slots, not public opening hours — declaring it here
+    // made Google show "Open now" for a place with no walk-in service, and forced hours
+    // onto the Google Business Profile. Session times stay visible on the page (visit
+    // block, labelled "Sessions"); they're just not claimed as opening hours. See SEO-TODO.
     acceptsReservations: 'True',
     servesCuisine: 'Specialty coffee',
     priceRange: SITE.priceRange,
