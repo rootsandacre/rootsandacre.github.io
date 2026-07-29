@@ -53,7 +53,21 @@ Log here whether Roots & Acre is mentioned and who is. Re-run monthly.
 
 | Date | Engine | Mentioned? | Who is cited |
 |---|---|---|---|
-| _baseline not yet run_ | | | |
+| 2026-07-29 | Perplexity — Q1 | ❌ no | Common Grounds · Ombe Coffee · Kopi Kalyan Archive · 1/15 Coffee · EXPAT Roasters · First Crack. 10 sources, nearly all `thewaytocoffee` |
+| 2026-07-29 | Perplexity — Q2 | ❌ no | Space Roastery · Giyanti · Smoking Barrels · Morph · Gerilya · Common Grounds · Anomali · Klinik Kopi. 10 sources, mostly `coconuts`, some `maxhavelaar` |
+| 2026-07-29 | ChatGPT | ⏳ not run | Auth wall; "Try it first" would not advance. Needs a signed-in run by Dan |
+| 2026-07-29 | Gemini | ⏳ not run | Logged-out prompt box accepts input but won't generate (Flash-Lite). Needs a signed-in run by Dan |
+
+**Method note (2026-07-29):** run logged-out from a non-Jakarta IP, so results reflect a
+generic/global view rather than what a local Jakarta user sees. Both queries name Jakarta
+explicitly, which limits but does not remove location bias. Re-running signed-in from Jakarta
+would be the more representative baseline.
+
+**Read of the Q1/Q2 results:** neither answer was drawing on the engines' own index of R&A —
+both were assembled from a small number of listicle sources (`thewaytocoffee`, `coconuts`).
+Getting cited is therefore less about on-site SEO and more about appearing in the roundup
+articles these engines lean on. Worth treating as a separate content/PR track from the
+technical SEO work.
 
 ## Deliberately-omitted FAQ facts (Phase 4, 2026-07-16)
 
