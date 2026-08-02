@@ -10,8 +10,9 @@
    static HTML is committed.)
 
    To change copy: edit T below (both languages, same commit).
-   To change business facts: edit SITE below — it is the single
-   source of truth for NAP/contact values across HTML and schema.
+   To change business facts: edit scripts/site-facts.js — it is the
+   single source of truth for NAP/contact values across HTML and
+   schema, shared with the beans.rootsandacre.com generator.
    To add a new page: give it a slug, add it to renderNav/renderFooter
    if it should be linked site-wide, add it to the `outputs` array,
    and add its slug to `PAGE_SLUGS` in renderSitemap().
@@ -22,6 +23,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { SITE, WA_TEXT, businessNode, websiteNode } = require('./site-facts');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -33,37 +35,10 @@ function assetVersion(relPath) {
   return crypto.createHash('sha256').update(buf).digest('hex').slice(0, 8);
 }
 
-/* ---------- Business facts (Phase 0.5 fact sheet) ---------- */
-
-const SITE = {
-  origin: 'https://rootsandacre.com',
-  name: 'Roots & Acre',
-  altName: 'Roots and Acre',
-  waNumber: '6287870702024', // +62 878-7070-2024
-  email: 'rootsandacre@gmail.com',
-  instagram: 'https://www.instagram.com/rootsandacre/',
-  tokopedia: 'https://www.tokopedia.com/roots-and-acre',
-  shopee: 'https://shopee.co.id/rootsandacre',
-  address: {
-    street: 'Jl. Paradise 14, Blok M No.13, RT.3/RW.19, Sunter Agung',
-    locality: 'Jakarta Utara',
-    region: 'DKI Jakarta',
-    postalCode: '14350',
-    country: 'ID'
-  },
-  // Confirmed 2026-07-28 from the building pin. Previous value (-6.13706, 106.86763) was an
-  // OSM street centroid ~67 m away — don't reintroduce it. 6dp ≈ 0.1 m, plenty of precision.
-  geo: { lat: -6.137118, lng: 106.867027 },
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
-    'Roots & Acre, Jl. Paradise 14, Blok M No.13, Sunter Agung, Tanjung Priok, Jakarta Utara 14350'
-  ),
-  foundingDate: '2024-04',
-  priceRange: 'Rp 170.000–322.000',
-  themeColor: '#28544b',
-  ogImage: '/assets/images/og-image.jpg', // real 1200×630 photo pending — see SEO-TODO.md
-  logo: '/assets/logo-full-apricot-trans.png',
-  ga4Id: 'G-0M9TPP0BYN' // GA4 Measurement ID — referral traffic from AI search, see SEO-TODO.md
-};
+/* ---------- Business facts ----------
+   SITE, the WhatsApp templates, and the shared business/website
+   schema nodes now live in scripts/site-facts.js so the
+   beans.rootsandacre.com generator uses the exact same values. */
 
 const LASTMOD = new Date().toISOString().slice(0, 10);
 
@@ -172,9 +147,10 @@ const T = {
     'footer.bottomLeft': '© 2026 Roots & Acre · Sunter, Jakarta Utara — roasting since April 2024',
     'footer.bottomNote': 'Reservation-only slow bar · Micro-roastery',
 
-    'wa.reserve': 'Hi Roots & Acre! I’d like to reserve a seat at the Bar & Lab.\n\nDate: \nSession: \nNumber of guests: \n\nThank you!',
-    'wa.buy': 'Hi Roots & Acre! I’d like to order some coffee. Could you help me pick this week’s lot?',
-    'wa.wholesale': 'Hi Roots & Acre! I’m from [café / company name], interested in your wholesale/export sample kit.',
+    /* Shared with beans.rootsandacre.com — edit in scripts/site-facts.js */
+    'wa.reserve': WA_TEXT.en.reserve,
+    'wa.buy': WA_TEXT.en.buy,
+    'wa.wholesale': WA_TEXT.en.wholesale,
 
     /* ---------- FAQ page (Phase 4) ---------- */
     'faq.metaTitle': 'FAQ — Roots & Acre Micro-roastery & Slow Bar · Jakarta',
@@ -333,9 +309,10 @@ const T = {
     'footer.bottomLeft': '© 2026 Roots & Acre · Sunter, Jakarta Utara — meroasting sejak April 2024',
     'footer.bottomNote': 'Slow bar khusus reservasi · Micro-roastery',
 
-    'wa.reserve': 'Halo Roots & Acre! Saya ingin reservasi kursi di Bar & Lab.\n\nTanggal: \nSesi: \nJumlah orang: \n\nTerima kasih!',
-    'wa.buy': 'Halo Roots & Acre! Saya ingin memesan kopi. Bisa dibantu pilih lot minggu ini?',
-    'wa.wholesale': 'Halo Roots & Acre! Saya dari [nama kafe/perusahaan], tertarik dengan sample kit wholesale/export.',
+    /* Shared with beans.rootsandacre.com — edit in scripts/site-facts.js */
+    'wa.reserve': WA_TEXT.id.reserve,
+    'wa.buy': WA_TEXT.id.buy,
+    'wa.wholesale': WA_TEXT.id.wholesale,
 
     /* ---------- FAQ page (Phase 4) ---------- */
     'faq.metaTitle': 'FAQ — Roots & Acre Micro-roastery & Slow Bar · Jakarta',
@@ -454,61 +431,10 @@ function homeHref(lang) {
   return lang === 'en' ? '/' : '/id/';
 }
 
-/* ---------- Structured data (Phase 3) ---------- */
-
-function businessNode(lang) {
-  const description = lang === 'en'
-    ? 'Roots & Acre is an Indonesian micro-roastery and reservation-only slow bar in Sunter, North Jakarta. It roasts single-origin lots sourced directly from farms across the archipelago in micro-batches, serves them in four private daily slow-bar sessions (reserve via WhatsApp or Instagram DM), and ships beans via Tokopedia and Shopee.'
-    : 'Roots & Acre adalah micro-roastery Indonesia dan slow bar khusus reservasi di Sunter, Jakarta Utara. Kami me-roasting lot single origin yang bersumber langsung dari kebun di seluruh Nusantara dalam batch kecil, menyajikannya dalam empat sesi slow bar privat setiap hari (reservasi via WhatsApp atau DM Instagram), dan mengirim biji kopi via Tokopedia dan Shopee.';
-  return {
-    '@type': ['CafeOrCoffeeShop', 'OnlineStore'],
-    '@id': `${SITE.origin}/#business`,
-    name: SITE.name,
-    alternateName: SITE.altName,
-    description,
-    url: `${SITE.origin}/`,
-    logo: `${SITE.origin}${SITE.logo}`,
-    image: `${SITE.origin}${SITE.logo}`,
-    telephone: `+${SITE.waNumber}`,
-    email: SITE.email,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: SITE.address.street,
-      addressLocality: SITE.address.locality,
-      addressRegion: SITE.address.region,
-      postalCode: SITE.address.postalCode,
-      addressCountry: SITE.address.country
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: SITE.geo.lat,
-      longitude: SITE.geo.lng
-    },
-    hasMap: SITE.mapsUrl,
-    // No openingHoursSpecification on purpose. The 12.00–21.30 window is the envelope of
-    // four reservation-only session slots, not public opening hours — declaring it here
-    // made Google show "Open now" for a place with no walk-in service, and forced hours
-    // onto the Google Business Profile. Session times stay visible on the page (visit
-    // block, labelled "Sessions"); they're just not claimed as opening hours. See SEO-TODO.
-    acceptsReservations: 'True',
-    servesCuisine: 'Specialty coffee',
-    priceRange: SITE.priceRange,
-    currenciesAccepted: 'IDR',
-    foundingDate: SITE.foundingDate,
-    sameAs: [SITE.instagram, SITE.tokopedia, SITE.shopee]
-  };
-}
-
-function websiteNode() {
-  return {
-    '@type': 'WebSite',
-    '@id': `${SITE.origin}/#website`,
-    url: `${SITE.origin}/`,
-    name: SITE.name,
-    inLanguage: ['en', 'id'],
-    publisher: { '@id': `${SITE.origin}/#business` }
-  };
-}
+/* ---------- Structured data (Phase 3) ----------
+   businessNode() and websiteNode() come from scripts/site-facts.js —
+   beans.rootsandacre.com emits the same nodes with the same @id values
+   so both hosts resolve to one business entity. */
 
 function webPageNode(lang, url, name, description) {
   return {

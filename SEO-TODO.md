@@ -26,6 +26,50 @@ in `SEO-PLAYBOOK.md` (Phase 0.5 table). Remaining open rows:
       `sitemap.xml` once Phase 1 ships. — done 2026-07-28, `sitemap.xml` submitted.
 - [x] Verify in **Bing Webmaster Tools** (one-click import from GSC; Bing powers
       ChatGPT search & Copilot retrieval). — done 2026-07-28, `sitemap.xml` submitted.
+### beans.rootsandacre.com — launch steps (added 2026-07-31)
+
+The link-in-bio page is built and verified locally. Everything left is outside
+the repos:
+
+- [ ] Create public repo **`rootsandacre/beans`** (same GitHub account — project
+      sites are unlimited; only the `<user>.github.io` user site is one-per-account).
+      Push the contents of `../beans.rootsandacre.com/`.
+- [ ] **Settings → Pages** → Source `main` / root. Confirm custom domain
+      `beans.rootsandacre.com` (the generated `CNAME` already declares it) and
+      enable **Enforce HTTPS**.
+- [ ] DNS: add `CNAME  beans  →  rootsandacre.github.io`.
+- [ ] **Google Search Console** — the existing property was verified by DNS TXT,
+      which makes it a *Domain* property covering every subdomain, so no new
+      property should be needed. Verify that assumption in GSC, then submit
+      `https://beans.rootsandacre.com/sitemap.xml`.
+- [ ] **Bing Webmaster Tools** — was a one-click GSC import; confirm whether the
+      subdomain came across or needs adding separately, then submit its sitemap.
+- [ ] Swap the **Instagram bio link** to `beans.rootsandacre.com`.
+- [ ] After a week, check GA4 for the `bio_link_click` event (parameters
+      `destination`, `link_url`) to see which channel the bio actually drives.
+      Register `destination` as a custom dimension in GA4 Admin if you want it
+      broken out in reports.
+
+### Deliberate exception: the bio page is not bilingual (2026-07-31)
+
+Playbook ground rule 4 says every new page ships EN + ID together.
+`beans.rootsandacre.com` deliberately does not, decided by Dan:
+
+- One Instagram bio link should resolve to one URL. An EN/ID pair behind it
+  means a language toggle on a page whose entire purpose is zero friction.
+- Three of the four tiles are proper nouns (Tokopedia, Shopee, WhatsApp); the
+  sub-labels are short plain English reused from approved `T.en` wording.
+
+This is a recorded decision, **not an oversight** — don't "fix" it by adding an
+`/id/` pair without asking. The main site remains fully bilingual.
+
+### Bio page — carried-over placeholders
+
+- `OG-IMAGE` — the bio page points at the main domain's existing 1200×630
+  branded placeholder (`https://rootsandacre.com/assets/images/og-image.jpg`).
+  Same swap-when-real-photos-land item as the row above; a bespoke bio-page OG
+  image would be better but is not blocking.
+
 - [ ] Create/claim **Google Business Profile** for the slow bar (category:
       Coffee roaster / Coffee shop). Name/address/phone must be character-identical
       to the site footer and schema. **Leave hours blank** — see below.

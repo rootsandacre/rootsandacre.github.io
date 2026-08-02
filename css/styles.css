@@ -4,7 +4,12 @@
    the Roots & Acre design system tokens.
    ============================================================ */
 
-/* ---------- TOKENS ---------- */
+/* ---------- TOKENS ----------
+   scripts/build-beans.js lifts everything between the TOKENS:START and
+   TOKENS:END markers verbatim and inlines it into beans.rootsandacre.com,
+   so the bio page can't drift from the main site's palette. Keep the
+   markers in place; edit the values freely. */
+/* TOKENS:START */
 :root {
   /* Brand colors */
   --ra-green:        #28544b;
@@ -60,6 +65,7 @@
   --ra-section-pad:  clamp(48px, 9vw, 96px) clamp(20px, 6vw, 56px);
   --ra-h2-size:      clamp(32px, 4vw, 48px);
 }
+/* TOKENS:END */
 
 /* ---------- BASE ---------- */
 *, *::before, *::after { box-sizing: border-box; }
